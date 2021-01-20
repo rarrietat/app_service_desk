@@ -1,0 +1,97 @@
+<form action="/horario/edit/{{horario._id}}?_method=PUT" method="POST" autocomplete="off">
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="card border-light shadow-sm components-section">
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-lg-5 col-sm-6 mb-4">
+                            <input type="hidden" id="idUsuario" value="{{usuario._id}}">
+                            <label for="usuario">Usuario</label>
+                            <input type="text" class="form-control" id="usuario" readonly>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-3 mb-4">
+                            <input type="hidden" id="idMes" value="{{horario.mes}}">
+                            <label for="mes">Mes</label>
+                            <select id="mes" name="mes" class="form-select">
+                            </select>
+                        </div>
+
+                        <div class="col-lg-3 col-sm-3 mb-4">
+                            <label for="descanso">Descanso</label>
+                            <input type="text" class="form-control" id="descanso" name="descanso" value="{{horario.descanso}}" readonly>
+                        </div>
+
+                    </div>
+
+                    <div class="row mb-2">
+                        <h2 class="h5">Lunes a Viernes</h2>
+                        <div class="col-lg-3 col-sm-6 mb-4">
+                            <label for="ingreso">Ingreso</label>
+                            <input type="time" class="form-control" id="ingreso" name="ingreso" value="{{semanal.ingreso}}" >
+                        </div>
+
+                        <div class="col-lg-3 col-sm-6 mb-4">
+                            <label for="salida">Salida</label>
+                            <input type="time" class="form-control" id="salida" name="salida" value="{{semanal.salida}}">
+                        </div>
+
+                        <div class="col-lg-6 col-sm-12">
+                            <label for="refrigerio">Refrigerio</label>
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-6 mb-4">
+                                    <input type="time" class="form-control" id="inicioRefrigerio" name="inicioRefrigerio" value="{{refrigerio.inicio}}">
+                                </div>
+                                <div class="col-lg-6 col-sm-6 mb-4">
+                                    <input type="time" class="form-control" id="finRefrigerio" name="finRefrigerio" value="{{refrigerio.fin}}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <h2 class="h5">Fin de semana</h2>
+                        <div class="col-lg-3 col-sm-12 mb-4">
+                            <label for="diafinSemana">Día</label>
+                            <input type="hidden" id="idDiaFinSemana" value="{{finSemana.dia}}">
+                            <select id="diafinSemana" name="diafinSemana" class="form-select">
+                                <option value="Sábado">Sábado</option>
+                                <option value="Domingo">Domingo</option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-2 col-sm-6 mb-4">
+                            <label for="ingresoFinSem">Ingreso</label>
+                            <input type="time" class="form-control" id="ingresoFinSem" name="ingresoFinSem" value="{{finSemana.ingreso}}">
+                        </div>
+
+                        <div class="col-lg-2 col-sm-6 mb-4">
+                            <label for="salidaFinSem">Salida</label>
+                            <input type="time" class="form-control" id="salidaFinSem" name="salidaFinSem" value="{{finSemana.salida}}">
+                        </div>
+
+                        <div class="col-lg-5 col-sm-12">
+                            <label for="finSemRefrigerio">Refrigerio</label>
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-6 mb-4">
+                                    <input type="time" class="form-control" id="inicioSemRefrigerio" name="inicioSemRefrigerio" value="{{refriFinSemana.inicio}}">
+                                </div>
+                                <div class="col-lg-6 col-sm-6">
+                                    <input type="time" class="form-control" id="finSemRefrigerio" name="finSemRefrigerio" value="{{refriFinSemana.fin}}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-primary float-right">Actualizar</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</form>
+
+<script src="/js/horario.js"></script>

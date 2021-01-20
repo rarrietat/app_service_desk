@@ -1,0 +1,10 @@
+.limitTextColum{
+	max-width: 250px;
+	overflow: hidden;
+	white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.bg-fractalia{
+	background-color: #5A5A5A;
+}

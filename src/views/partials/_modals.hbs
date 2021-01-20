@@ -1,0 +1,130 @@
+<!-- Start Modal Asignación -->
+<div class="col-md-4" style="font-size: 14px;">
+
+    <div class="modal fade" id="modal-asignacion" tabindex="-1" role="dialog" aria-labelledby="modal-asignacion"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalAsigNroInc" class="h6 modal-title"></h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="card border-light">
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row mb-2">
+                                        <div class="col-lg-6 col-sm-6">
+
+                                            <input type="hidden" id="modalIdAsig">
+
+                                            <div class="mb-2">
+                                                <label class="h6 mb-0">Empresa</label><br>
+                                                <span id="modalAsigCliente"></span>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="h6 mb-0">Usuario Asignado</label><br>
+                                                <span id="modalAsigUsuario"></span>
+                                            </div>
+
+                                            <div class="row mb-2">
+                                                <div class="col">
+                                                    <label class="h6 mb-0">Segmento</label><br>
+                                                    <span id="modalAsigSegmento"></span>
+                                                </div>
+
+                                                <div class="col">
+                                                    <label class="h6 mb-0">Plazo</label><br>
+                                                    <span id="modalAsigPlazo"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="h6 mb-0">Asesor Asignado</label><br>
+                                                <span id="modalAsigAsesor"></span>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-lg-6 col-sm-6">
+
+                                            <div class="row mb-2">
+                                                <div class="col-8">
+                                                    <label class="h6 mb-0">Prioridad</label><br>
+                                                    <span id="modalAsigPrioridad"></span>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label class="h6 mb-0">Estado</label><br>
+                                                    <span id="modalAsigEstInc"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-2">
+                                                <div class="col-8">
+                                                    <label class="h6 mb-0">Grupo Asignado</label><br>
+                                                    <span id="modalAsigGrupo"></span>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label class="h6 mb-0">Escalado</label><br>
+                                                    <span id="modalAsigEscalado"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="h6 mb-0">Estado SLA</label><br>
+                                                <span id="modalAsigEstSla"></span>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <label class="h6 mb-0">Tipo incidente</label><br>
+                                                <span id="modalAsigTipo"></span>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row mb-2">
+                                        <div class="col-lg-12 col-sm-12">
+                                            <div class="mb-2">
+                                                <label class="h6 mb-0">Resumen</label>
+                                                <span id="modalAsigResumen"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-2">
+                                        <div class="col-lg-12 col-sm-12">
+                                            <div class="mb-2">
+                                                <label for="descripcion" class="h6 mb-0">Nota</label>
+                                                <textarea class="form-control" id="modalAsigNota" rows="8" readonly style="font-size: 14px;"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        {{!-- <div class="modal-footer">
+                            <a id="modalBtnEditInc" type="button" class="btn btn-sm btn-secondary">Editar</a>
+                            <button type="button" class="btn btn-link text-danger ml-auto"
+                                data-dismiss="modal">Cerrar</button>
+                        </div> --}}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- End Modal Asignación -->

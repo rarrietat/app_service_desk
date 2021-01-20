@@ -1,0 +1,67 @@
+{{#if message}}
+
+    <script>
+
+        window.addEventListener('load', () => {
+            
+            const notyf = new Notyf({
+                position: {
+                    x: 'center',
+                    y: 'top',
+                },
+                types: [
+                    {
+                        type: 'info',
+                        background: '#EA3F3F',
+                        icon: {
+                            className: 'fas fa-info-circle',
+                            tagName: 'span',
+                            color: '#fff'
+                        },
+                        dismissible: false
+                    }
+                ]
+            });
+            notyf.open({
+                type: 'info',
+                message: '{{message}}'
+            });
+        })
+
+    </script>
+
+{{/if}}
+
+{{#each errors}}
+
+    <script>
+
+        window.addEventListener('load', () => {
+            
+            const notyf = new Notyf({
+                position: {
+                    x: 'center',
+                    y: 'top',
+                },
+                types: [
+                    {
+                        type: 'info',
+                        background: '#EA3F3F',
+                        icon: {
+                            className: 'fas fa-info-circle',
+                            tagName: 'span',
+                            color: '#fff'
+                        },
+                        dismissible: false
+                    }
+                ]
+            });
+            notyf.open({
+                type: 'info',
+                message: '{{text}}'
+            });
+        })
+
+    </script>
+
+{{/each}}

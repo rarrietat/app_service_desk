@@ -1,0 +1,52 @@
+<div class="card card-body border-light shadow-sm table-wrapper table-responsive pt-0">
+  <table id="datatable" class="table" width="100%">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nro. Incidencia</th>
+        <th>Cliente</th>
+        <th>Estado</th>
+        <th>Segmento</th>
+        <th>Plazo</th>
+        <th>Usuario</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {{#each asignaciones}}
+
+      <tr>
+        <td><span class="font-weight-normal">{{formatIndex @index}}</span></td>
+        <td><span class="font-weight-normal"><a onclick="btnModalAsignacion('{{_id}}')" data-toggle="modal" data-target="#modal-asignacion">{{nro_incidencia}}</a></span></td>
+        <td class="limitTextColum"><span class="font-weight-bold">{{cliente}}</span></td>
+        <td><span class="font-weight-normal">{{estado_inc}}</span></td>
+        <td><span class="font-weight-normal">{{segmento}}</span></td>
+        <td><span class="font-weight-normal">{{plazo}}</span></td>
+        <td><span class="font-weight-bold">{{nombre}} {{apellido}}</span></td>
+        <td>
+          <div class="btn-group">
+            <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <span class="icon icon-sm">
+                <span class="fas fa-ellipsis-h icon-dark"></span>
+              </span>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/usuario/edit/{{_id}}"><span class="fas fa-edit mr-2"></span>Editar</a>
+              <button type="button" onclick="btnEliminar('/usuario/delete/{{_id}}')" class="dropdown-item text-danger"><span class="fas fa-trash-alt mr-2"></span>Eliminar</button>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      {{/each}}
+
+    </tbody>
+  </table>
+</div>
+
+<script src="/js/datatable.js"></script>
+<script src="/js/confirm_delete.js"></script>
+<script src="/js/loadModals.js"></script>

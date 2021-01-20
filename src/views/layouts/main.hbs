@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+{{> _head }}
+
+</head>
+
+<body cz-shortcut-listen="true">
+
+        {{> _navbar }}
+        
+        {{> _sidebar}}
+
+        <main class="content">
+            
+
+            {{> _topbar }}
+
+            {{> _errors }}
+
+            {{> _alerts }}
+
+            {{{ body }}}
+
+            {{> _modals }}
+
+        </main>
+
+       {{> _scripts }}
+    
+</body>
+
+</html>

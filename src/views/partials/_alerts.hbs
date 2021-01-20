@@ -1,0 +1,67 @@
+{{#if success_msg}}
+
+    <script>
+
+        window.addEventListener('load', () => {
+
+            const notyf = new Notyf({
+                position: {
+                    x: 'right',
+                    y: 'top',
+                },
+                types: [
+                    {
+                        type: 'info',
+                        background: '#47BA68',
+                        icon: {
+                            className: 'fas fa-info-circle',
+                            tagName: 'span',
+                            color: '#fff'
+                        },
+                        dismissible: false
+                    }
+                ]
+            });
+            notyf.open({
+                type: 'info',
+                message: '{{success_msg}}'
+            });
+
+        })
+
+    </script>
+
+{{else if login_msg}}
+
+    <script>
+
+        window.addEventListener('load', () => {
+
+            const notyf = new Notyf({
+                position: {
+                    x: 'right',
+                    y: 'top',
+                },
+                types: [
+                    {
+                        type: 'info',
+                        background: '#2C64E5',
+                        icon: {
+                            className: 'fas fa-info-circle',
+                            tagName: 'span',
+                            color: '#fff'
+                        },
+                        dismissible: false
+                    }
+                ]
+            });
+            notyf.open({
+                type: 'info',
+                message: '{{login_msg}}'
+            });
+
+        })
+
+    </script>
+
+{{/if}}

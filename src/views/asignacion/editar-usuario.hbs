@@ -1,0 +1,82 @@
+<form action="/usuario/edit/{{usuario._id}}{{usuario_id}}?_method=PUT" method="POST" autocomplete="off">
+    <input type="hidden" name="_method" value="PUT">
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="card border-light shadow-sm components-section">
+                <div class="card-body">
+                    <h2 class="h5 mb-4">Información General</h2>
+                    <div class="row mb-4">
+                        <div class="col-lg-3 col-sm-6">
+
+                            <div class="mb-4">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" value="{{usuario.nombre}}{{nombre}}">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="apellido">Apellido</label>
+                                <input type="text" class="form-control" id="apellido" name="apellido" value="{{usuario.apellido}}{{apellido}}">
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-3 col-sm-6">
+
+                            <div class="mb-4">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" value="{{usuario.username}}{{username}}">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" value="{{usuario.password}}{{password}}">
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-3 col-sm-6">
+
+                            <div class="mb-4">
+                                <label for="correo">Correo</label>
+                                <input type="text" class="form-control" id="correo" name="correo" value="{{usuario.correo}}{{correo}}">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="celular">Celular</label>
+                                <input type="mail" class="form-control" id="celular" name="celular" value="{{usuario.celular}}{{celular}}">
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-3 col-sm-6">
+
+                            <div class="mb-4">
+                                <input type="hidden" id="idRol" value="{{usuario.rol}}{{rol}}">
+                                <label for="rol">Rol</label>
+                                <select id="rol" name="rol" class="form-select">
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <input type="hidden" id="idEquipo" value="{{usuario.equipo}}{{equipo}}">
+                                <label for="equipo">Equipo</label>
+                                <select id="equipo" name="equipo" class="form-select">
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="mt-3">
+                            <button type="submit" class="btn btn-primary float-right">Actualizar</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</form>
+
+<script src="/js/usuario.js"></script>

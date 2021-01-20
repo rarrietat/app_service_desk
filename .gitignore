@@ -1,0 +1,5 @@
+node_modules
+.env
+src/scss
+src/public/upload
+src/public/vendor
