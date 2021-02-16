@@ -1,0 +1,51 @@
+<form action="/grupo_gics/edit/{{grupoGics._id}}?_method=PUT" method="POST" autocomplete="off">
+    <input type="hidden" name="_method" value="PUT">
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="card border-light shadow-sm components-section">
+                <div class="card-body">
+                    <div class="row mb-4">
+
+                        <div class="col-lg-6 col-sm-6">
+
+                            <input type="hidden" id="idEquipoAsig" value="{{grupoGics.equipo_asignado}}">
+                            <div class="mb-4">
+                                <label for="equipo_asignado">Equipo Asignado</label>
+                                <select id="equipo_asignado" name="equipo_asignado" class="form-select">
+                                </select>
+                            </div>
+
+                            <input type="hidden" id="idZonalAsig" value="{{grupoGics.zonal_asignado}}">
+                            <div class="mb-4">
+                                <label for="zonal_asignado">Zonal Asignado</label>
+                                <select id="zonal_asignado" name="zonal_asignado" class="form-select">
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="grupo_gics">Grupo</label>
+                                <input type="text" class="form-control" id="grupo_gics" name="grupo_gics" value="{{grupoGics.grupo_gics}}">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="mb-4">
+                                <label for="descripcion">Descripción</label>
+                                <textarea class="form-control" placeholder="Descripción del grupo..." id="descripcion" name="descripcion" rows="5">{{grupoGics.descripcion}}</textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-primary float-right">Actualizar</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</form>
+
+<script src="/js/loadChoicesGrupoGics.js"></script>

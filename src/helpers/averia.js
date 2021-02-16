@@ -35,6 +35,9 @@ helpers.LeerExcel = async () => {
         let segmento = element['Apellidos del cliente']
         let plazo = element['Nombre del cliente']
         let fecha = element['Fecha de notificación']
+        const partsFecha = fecha.split('/')
+        fecha = `${partsFecha[1]}-${partsFecha[0]}-${partsFecha[2]}`
+
         let estado_sla = element['Estado de resolución de SLA']
         let escalado = element['¿Escalado?']
         let grupo_asignado = element['Grupo asignado']

@@ -24,4 +24,24 @@ indexCtrl.renderRol = (req, res) => {
     res.render('rol')
 }
 
+indexCtrl.renderEquipoAsignado = (req, res) => {
+    res.render('equipo_asignado')
+}
+
+indexCtrl.renderZonalAsignado = (req, res) => {
+    res.render('zonal_asignado')
+}
+
+indexCtrl.renderGrupoGics = (req, res) => {
+    res.render('grupo_gics')
+}
+
+indexCtrl.renderUsuarioGrupoGics = (req, res) => {
+    res.render('usuario_grupogics')
+}
+
+indexCtrl.renderTecnico = (req, res) => {
+    res.render('tecnico')
+}
+
 module.exports = indexCtrl

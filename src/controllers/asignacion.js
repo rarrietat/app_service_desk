@@ -6,6 +6,10 @@ const helperFile = require('../helpers/file')
 const helperAveria = require('../helpers/averia')
 const Usuario = require('../models/Usuario')
 
+const dayjs = require('dayjs')
+require('dayjs/locale/es')
+dayjs.locale('es')
+
 asignacionCtrl.renderAsignacionForm = (req, res) => {
 
     res.render('asignacion/agregar-asignacion', {
@@ -77,6 +81,7 @@ asignacionCtrl.apiAsignacionById = async (req, res) => {
 
     const asignacion = await Asignacion.findById(req.params.id).populate('usuario').lean()
     asignacion.usuario = await `${asignacion.usuario[0].nombre} ${asignacion.usuario[0].apellido}`
+    asignacion.fecha = await dayjs(asignacion.fecha).format('DD/MM/YYYY HH:mm:ss')
 
     res.json(asignacion)
 }

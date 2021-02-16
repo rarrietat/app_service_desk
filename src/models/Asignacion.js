@@ -8,7 +8,7 @@ const AsignacionSchema = new Schema({
     prioridad: String,
     segmento: String,
     plazo: String,
-    fecha: String,
+    fecha: Date,
     estado_sla: String,
     escalado: String,
     grupo_asignado: String,

@@ -1,0 +1,43 @@
+<div class="card card-body border-light shadow-sm table-wrapper table-responsive pt-0">
+    <table class="table" id="datatable" width="100%">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Zonal</th>
+                <th>Equipo</th>
+                <th>Descripción</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {{#each zonalAsignados}}
+            <tr>
+                <td><span class="font-weight-bold">{{formatIndex @index}}</span></td>
+                <td><span class="font-weight-bold">{{zonal}}</span></td>
+                <td><span class="font-weight-normal">{{equipo}}</span></td>
+                <td><span class="font-weight-normal">{{descripcion}}</span></td>
+                <td>
+                    <div class="btn-group">
+                        <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="icon icon-sm">
+                                <span class="fas fa-ellipsis-h icon-dark"></span>
+                            </span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/zonal_asignado/edit/{{_id}}"><span class="fas fa-edit mr-2"></span>Editar</a>
+                            <button type="button" onclick="btnEliminar('/zonal_asignado/delete/{{_id}}')" class="dropdown-item text-danger"><span class="fas fa-trash-alt mr-2"></span>Eliminar</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {{/each}}
+
+        </tbody>
+    </table>
+</div>
+
+<script src="/js/datatable.js"></script>
+<script src="/js/confirm_delete.js"></script>

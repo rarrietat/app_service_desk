@@ -33,12 +33,12 @@
               </div>
               <ul class="nav flex-column pt-3 pt-md-0">
                 
-                <li class="nav-item {{#if activeHome}} active {{/if}}">
+                {{!-- <li class="nav-item {{#if activeHome}} active {{/if}}">
                   <a href="/" class="nav-link">
                     <span class="sidebar-icon"><span class="fas fa-house-user"></span></span>
                     <span class="sidebar-text">Home</span>
                   </a>
-                </li>
+                </li> --}}
 
                 <li class="nav-item {{#if activeAsignacion}} active {{/if}}">
                   <a href="/asignacion" class="nav-link">
@@ -80,18 +80,63 @@
                     </span>
                     <div class="multi-level collapse {{#if activeMantenimiento}} show {{/if}}" role="list" id="submenu-mantenimiento" aria-expanded="false">
                       <ul class="flex-column nav">
+
+                        <li class="nav-item {{#if activeTecnico}} active {{/if}}">
+                          <a href="/tecnico" class="nav-link">
+                            <span class="sidebar-text-contracted">T</span>
+                            <span class="sidebar-text">Técnico</span>
+                          </a>
+                        </li>
+
+                        <li class="nav-item {{#if activeUsuarioGrupoGics}} active {{/if}}">
+                          <a href="/usuario_grupogics" class="nav-link">
+                            <span class="sidebar-text-contracted">U</span>
+                            <span class="sidebar-text">Usuario Grupo Gics</span>
+                          </a>
+                        </li>
+
+                        <li class="nav-item {{#if activeEscalamiento}} active {{/if}}">
+                          <a href="/escalamiento" class="nav-link">
+                            <span class="sidebar-text-contracted">E</span>
+                            <span class="sidebar-text">Escalamiento</span>
+                          </a>
+                        </li>
+
+                        <li class="nav-item {{#if activeGrupoGics}} active {{/if}}">
+                          <a href="/grupo_gics" class="nav-link">
+                            <span class="sidebar-text-contracted">G</span>
+                            <span class="sidebar-text">Grupo Gics</span>
+                          </a>
+                        </li>
+
+                        <li class="nav-item {{#if activeZonalAsignado}} active {{/if}}">
+                          <a href="/zonal_asignado" class="nav-link">
+                            <span class="sidebar-text-contracted">Z</span>
+                            <span class="sidebar-text">Zonal Asignado</span>
+                          </a>
+                        </li>
+
+                        <li class="nav-item {{#if activeEquipoAsignado}} active {{/if}}">
+                          <a href="/equipo_asignado" class="nav-link">
+                            <span class="sidebar-text-contracted">EA</span>
+                            <span class="sidebar-text">Equipo Asignado</span>
+                          </a>
+                        </li>
+
                         <li class="nav-item {{#if activeEquipo}} active {{/if}}">
                           <a href="/equipo" class="nav-link">
                             <span class="sidebar-text-contracted">E</span>
                             <span class="sidebar-text">Equipo</span>
                           </a>
                         </li>
+
                         <li class="nav-item {{#if activeRol}} active {{/if}}">
                           <a href="/rol" class="nav-link">
                             <span class="sidebar-text-contracted">R</span>
                             <span class="sidebar-text">Rol</span>
                           </a>
                         </li>
+
                       </ul>
                     </div>
                   </li>

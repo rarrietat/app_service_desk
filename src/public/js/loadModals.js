@@ -32,7 +32,7 @@ async function btnModalAsignacion(asig_id) {
             plazo.innerHTML = data.plazo
             grupo_asig.innerHTML = data.grupo_asignado
             usuario_asig.innerHTML = data.usuario_asignado
-            //fecha.innerHTML = data.fecha
+            fecha.innerHTML = data.fecha
             estado_sla.innerHTML = data.estado_sla
             escalado.innerHTML = data.escalado
             tipo_inc.innerHTML = data.tipo_inc

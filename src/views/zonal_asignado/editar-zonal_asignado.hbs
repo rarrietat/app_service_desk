@@ -1,0 +1,45 @@
+<form action="/zonal_asignado/edit/{{zonalAsignado._id}}?_method=PUT" method="POST" autocomplete="off">
+    <input type="hidden" name="_method" value="PUT">
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="card border-light shadow-sm components-section">
+                <div class="card-body">
+                    <div class="row mb-4">
+
+                        <div class="col-lg-6 col-sm-6">
+
+                            <div class="mb-4">
+                                <label for="zonal">Zonal</label>
+                                <input type="text" class="form-control" id="zonal" name="zonal" value="{{zonalAsignado.zonal}}">
+                            </div>
+
+                            <input type="hidden" id="idEquipoAsig" value="{{zonalAsignado.equipo_asignado}}">
+                            <div class="mb-4">
+                                <label for="equipo_asignado">Equipo Asignado</label>
+                                <select id="equipo_asignado" name="equipo_asignado" class="form-select">
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="mb-4">
+                                <label for="descripcion">Descripción</label>
+                                <textarea class="form-control" placeholder="Descripción del usuario..." id="descripcion" name="descripcion" rows="5">{{zonalAsignado.descripcion}}</textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-primary float-right">Actualizar</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</form>
+
+<script src="/js/loadChoicesEquipoAsignado.js"></script>

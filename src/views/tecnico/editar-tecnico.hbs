@@ -1,0 +1,65 @@
+<form action="/tecnico/edit/{{tecnico._id}}?_method=PUT" method="POST" autocomplete="off">
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="card border-light shadow-sm components-section">
+                <div class="card-body">
+                    <div class="row mb-4">
+
+                        <div class="col-lg-6 col-sm-6">
+
+                            <div class="mb-4">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" value="{{tecnico.nombre}}">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="apellido">Apellido</label>
+                                <input type="text" class="form-control" id="apellido" name="apellido" value="{{tecnico.apellido}}">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="celular">Celular</label>
+                                <input type="text" class="form-control" id="celular" name="celular" value="{{tecnico.celular}}">
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6 col-sm-6">
+
+                            <input type="hidden" id="idEquipoAsig" value="{{tecnico.equipo_asignado}}">
+                            <div class="mb-4">
+                                <label for="equipo_asignado">Equipo Asignado</label>
+                                <select id="equipo_asignado" name="equipo_asignado" class="form-select">
+                                </select>
+                            </div>
+
+                            <input type="hidden" id="idZonalAsig" value="{{tecnico.zonal_asignado}}">
+                            <div class="mb-4">
+                                <label for="zonal_asignado">Zonal Asignado</label>
+                                <select id="zonal_asignado" name="zonal_asignado" class="form-select">
+                                </select>
+                            </div>
+
+                            <input type="hidden" id="idGrupoGics" value="{{tecnico.grupo_gics}}">
+                            <div class="mb-4">
+                                <label for="grupo_gics">Grupo Gics</label>
+                                <select id="grupo_gics" name="grupo_gics" class="form-select">
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-primary float-right">Guardar</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</form>
+
+<script src="/js/loadChoicesUsuarioGrupoGics.js"></script>

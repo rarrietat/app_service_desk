@@ -65,6 +65,11 @@ app.use(require('./routes/usuario'))
 app.use(require('./routes/horario'))
 app.use(require('./routes/equipo'))
 app.use(require('./routes/rol'))
+app.use(require('./routes/equipo_asignado'))
+app.use(require('./routes/zonal_asignado'))
+app.use(require('./routes/grupo_gics'))
+app.use(require('./routes/usuario_grupogics'))
+app.use(require('./routes/tecnico'))
 
 // Static files
 app.use(express.static(path.join(__dirname, 'public')))
