@@ -8,7 +8,8 @@ const {
     renderEditForm,
     updateUsuarioGrupoGics,
     deleteUsuarioGrupoGics,
-    apiUsuariosGrupoGics
+    apiUsuariosGrupoGics,
+    apiUsuariosGrupoGicsByGrupoGics
 } = require('../controllers/usuario_grupogics')
 
 const {isAuthenticated} = require('../helpers/auth')
@@ -20,5 +21,6 @@ router.get('/usuario_grupogics/edit/:id', renderEditForm)
 router.put('/usuario_grupogics/edit/:id', updateUsuarioGrupoGics)
 router.get('/usuario_grupogics/delete/:id', deleteUsuarioGrupoGics)
 router.get('/api/usuarios_grupogics', apiUsuariosGrupoGics)
+router.get('/api/usuario_asig/:id', apiUsuariosGrupoGicsByGrupoGics)
 
 module.exports = router

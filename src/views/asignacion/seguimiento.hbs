@@ -1,0 +1,374 @@
+<div class="row">
+    <div class="col-12">
+        <div class="row mb-2">
+            <div class="col-lg-6 col-sm-6">
+
+                <input type="hidden" id="modalIdAsig">
+
+                <div class="mb-2">
+                    <label class="h6 mb-0">Empresa</label><br>
+                    <span id="modalAsigCliente">{{asignacion.cliente}}</span>
+                </div>
+
+                <div class="mb-2">
+                    <label class="h6 mb-0">Usuario Asignado</label><br>
+                    <span id="modalAsigUsuario">{{asignacion.usuario_asignado}}</span>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col">
+                        <label class="h6 mb-0">Segmento</label><br>
+                        <span id="modalAsigSegmento">{{asignacion.segmento}}</span>
+                    </div>
+
+                    <div class="col">
+                        <label class="h6 mb-0">Plazo</label><br>
+                        <span id="modalAsigPlazo">{{asignacion.plazo}}</span>
+                    </div>
+                </div>
+
+                {{!-- <div class="mb-2">
+                                                <label class="h6 mb-0">Asesor Asignado</label><br>
+                                                <span id="modalAsigAsesor"></span>
+                                            </div> --}}
+
+                <div class="row mb-2">
+                    <div class="col">
+                        <label class="h6 mb-0">Asesor</label><br>
+                        <span id="modalAsigAsesor">{{asignacion.asesor}}</span>
+                    </div>
+
+                    <div class="col">
+                        <label class="h6 mb-0">Fecha</label><br>
+                        <span id="modalAsigFecha">{{asignacion.fecha}}</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-6 col-sm-6">
+
+                <div class="row mb-2">
+                    <div class="col-8">
+                        <label class="h6 mb-0">Prioridad</label><br>
+                        <span id="modalAsigPrioridad">{{asignacion.prioridad}}</span>
+                    </div>
+
+                    <div class="col-4">
+                        <label class="h6 mb-0">Estado</label><br>
+                        <span id="modalAsigEstInc">{{asignacion.estado_inc}}</span>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-8">
+                        <label class="h6 mb-0">Grupo Asignado</label><br>
+                        <span id="modalAsigGrupo">{{asignacion.grupo_asignado}}</span>
+                    </div>
+
+                    <div class="col-4">
+                        <label class="h6 mb-0">Escalado</label><br>
+                        <span id="modalAsigEscalado">{{asignacion.escalado}}</span>
+                    </div>
+                </div>
+
+                <div class="mb-2">
+                    <label class="h6 mb-0">Estado SLA</label><br>
+                    <span id="modalAsigEstSla">{{asignacion.estado_sla}}</span>
+                </div>
+
+                <div class="mb-2">
+                    <label class="h6 mb-0">Tipo incidente</label><br>
+                    <span id="modalAsigTipo">{{asignacion.tipo_inc}}</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-lg-12 col-sm-12">
+                <div class="mb-2">
+                    <label class="h6 mb-0">Resumen</label>
+                    <span id="modalAsigResumen">{{asignacion.resumen}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-lg-12 col-sm-12">
+                <div class="mb-2">
+                    <label for="descripcion" class="h6 mb-0">Nota</label>
+                    <textarea class="form-control" id="modalAsigNota" rows="8" readonly
+                        style="font-size: 14px;">{{asignacion.nota}}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Seguimiento --}}
+
+<div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                Registro, Diagnostico y Despacho
+            </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+
+                <form id="formHito1" autocomplete="off">
+                    <div class="row">
+                        <div class="col-12 mb-4">
+                            <div class="card border-light shadow-sm components-section">
+                                <div class="card-body">
+                                    <div class="row mb-0">
+
+                                        <div class="col-lg-6 col-sm-6">
+
+                                            <input type="hidden" name="idSegHito1" value="{{asignacion._id}}">
+
+                                            <div class="mb-4">
+                                                <label for="registro_tiempo">¿Se registró el caso dentro de los 10
+                                                    min?</label>
+                                                <select id="registro_tiempo" name="registro_tiempo" class="form-select">
+                                                    <option value="Si">Si</option>
+                                                    <option value="No">No</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <label for="diag_correcto">¿Se registró el diagnóstico
+                                                    correctamente?</label>
+                                                <select id="diag_correcto" name="diag_correcto" class="form-select">
+                                                    <option value="Si">Si</option>
+                                                    <option value="No">No</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-lg-6 col-sm-6">
+                                            <div class="mb-4">
+                                                <label for="descripcion">Corregir diagnóstico</label>
+                                                <textarea class="form-control"
+                                                    placeholder="En caso el diagnóstico no fuese el correcto, utilice este cuadro..."
+                                                    id="descripcion" name="descripcion" rows="5"></textarea>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row mb-0">
+                                        <div class="col-lg-4 col-sm-6">
+                                            <div class="mb-4">
+                                                <label for="despacho_correcto">¿Se realizó el despacho correctamente?</label>
+                                                <select id="despacho_correcto" name="despacho_correcto" class="form-select">
+                                                    <option value="Si">Si</option>
+                                                    <option value="No">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-sm-6">
+                                            <div class="mb-4">
+                                                <label for="grupo_asignado">Grupo asignado</label>
+                                                <select id="grupo_asignado" name="grupo_asignado" class="form-select">
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-sm-6">
+                                            <div class="mb-4">
+                                                <label for="usuario_asignado">Usuario asignado</label>
+                                                <select id="usuario_asignado" name="usuario_asignado"
+                                                    class="form-select">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-3">
+                                        <button type="submit" class="btn btn-primary float-right">Guardar</button>
+                                        {{!-- <button type="submit" class="btn btn-primary float-right">Guardar</button> --}}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Asignación de Personal Técnico
+            </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum obcaecati omnis at ipsum, unde itaque
+                sequi commodi, cumque repellat fugit veritatis ratione. Voluptatum at necessitatibus a, perspiciatis
+                placeat alias earum fugit ab neque dolore dolor debitis. Iste fuga veniam deleniti illum accusantium
+                doloribus corporis et, harum odio minima laudantium dolorem non saepe eligendi ea reiciendis debitis
+                repudiandae a sed rerum aliquam! Exercitationem, odit dolor. Officia ducimus dolore ratione suscipit?
+                Minus necessitatibus animi totam eligendi earum explicabo eius, iure commodi repellendus rerum
+                praesentium ab, doloribus deleniti corporis quidem doloremque esse quae! Rerum molestiae quae eligendi
+                nostrum tempore quos dolor nobis dicta!
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Desplazamiento de Personal Técnico
+            </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum obcaecati omnis at ipsum, unde itaque
+                sequi commodi, cumque repellat fugit veritatis ratione. Voluptatum at necessitatibus a, perspiciatis
+                placeat alias earum fugit ab neque dolore dolor debitis. Iste fuga veniam deleniti illum accusantium
+                doloribus corporis et, harum odio minima laudantium dolorem non saepe eligendi ea reiciendis debitis
+                repudiandae a sed rerum aliquam! Exercitationem, odit dolor. Officia ducimus dolore ratione suscipit?
+                Minus necessitatibus animi totam eligendi earum explicabo eius, iure commodi repellendus rerum
+                praesentium ab, doloribus deleniti corporis quidem doloremque esse quae! Rerum molestiae quae eligendi
+                nostrum tempore quos dolor nobis dicta!
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFour">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                Solución
+            </button>
+        </h2>
+        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum obcaecati omnis at ipsum, unde itaque
+                sequi commodi, cumque repellat fugit veritatis ratione. Voluptatum at necessitatibus a, perspiciatis
+                placeat alias earum fugit ab neque dolore dolor debitis. Iste fuga veniam deleniti illum accusantium
+                doloribus corporis et, harum odio minima laudantium dolorem non saepe eligendi ea reiciendis debitis
+                repudiandae a sed rerum aliquam! Exercitationem, odit dolor. Officia ducimus dolore ratione suscipit?
+                Minus necessitatibus animi totam eligendi earum explicabo eius, iure commodi repellendus rerum
+                praesentium ab, doloribus deleniti corporis quidem doloremque esse quae! Rerum molestiae quae eligendi
+                nostrum tempore quos dolor nobis dicta!
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* Toggle Menu */
+    const toggleCollapse1 = document.querySelector('#headingOne .accordion-button')
+    const toggleCollapse2 = document.querySelector('#headingTwo .accordion-button')
+    const toggleCollapse3 = document.querySelector('#headingThree .accordion-button')
+    const toggleCollapse4 = document.querySelector('#headingFour .accordion-button')
+
+    const collapse1 = document.querySelector('#collapseOne')
+    const collapse2 = document.querySelector('#collapseTwo')
+    const collapse3 = document.querySelector('#collapseThree')
+    const collapse4 = document.querySelector('#collapseFour')
+
+    let tc1 = toggleCollapse1.getAttribute('aria-expanded')
+    let tc2 = toggleCollapse2.getAttribute('aria-expanded')
+    let tc3 = toggleCollapse1.getAttribute('aria-expanded')
+    let tc4 = toggleCollapse2.getAttribute('aria-expanded')
+
+    toggleCollapse1.onclick = (e) => {
+        e.target.classList.toggle('collapsed')
+        collapse1.classList.toggle('show')
+
+        toggleCollapse2.classList.add('collapsed')
+        toggleCollapse3.classList.add('collapsed')
+        toggleCollapse4.classList.add('collapsed')
+
+        collapse2.classList.remove('show')
+        collapse3.classList.remove('show')
+        collapse4.classList.remove('show')
+
+        if (tc1 == 'true') {
+            tc1 = 'false'
+        } else {
+            tc1 = 'true'
+        }
+        toggleCollapse1.setAttribute('aria-expanded', tc1)
+    }
+
+    toggleCollapse2.onclick = (e) => {
+        e.target.classList.toggle('collapsed');
+        collapse2.classList.toggle('show')
+
+        toggleCollapse1.classList.add('collapsed')
+        toggleCollapse3.classList.add('collapsed')
+        toggleCollapse4.classList.add('collapsed')
+
+        collapse1.classList.remove('show')
+        collapse3.classList.remove('show')
+        collapse4.classList.remove('show')
+
+        if (tc2 == 'true') {
+            tc2 = 'false'
+        } else {
+            tc2 = 'false'
+        }
+        toggleCollapse2.setAttribute('aria-expanded', tc2)
+    }
+
+    toggleCollapse3.onclick = (e) => {
+        e.target.classList.toggle('collapsed');
+        collapse3.classList.toggle('show')
+
+        toggleCollapse1.classList.add('collapsed')
+        toggleCollapse2.classList.add('collapsed')
+        toggleCollapse4.classList.add('collapsed')
+
+        collapse1.classList.remove('show')
+        collapse2.classList.remove('show')
+        collapse4.classList.remove('show')
+
+        if (tc3 == 'true') {
+            tc3 = 'false'
+        } else {
+            tc3 = 'false'
+        }
+        toggleCollapse3.setAttribute('aria-expanded', tc3)
+    }
+
+    toggleCollapse4.onclick = (e) => {
+        e.target.classList.toggle('collapsed');
+        collapse4.classList.toggle('show')
+
+        toggleCollapse1.classList.add('collapsed')
+        toggleCollapse2.classList.add('collapsed')
+        toggleCollapse3.classList.add('collapsed')
+
+        collapse1.classList.remove('show')
+        collapse2.classList.remove('show')
+        collapse3.classList.remove('show')
+
+        if (tc4 == 'true') {
+            tc4 = 'false'
+        } else {
+            tc4 = 'false'
+        }
+        toggleCollapse4.setAttribute('aria-expanded', tc4)
+    }
+</script>
+
+<script src="/js/seguimiento.js"></script>

@@ -9,7 +9,7 @@
         <th>Segmento</th>
         <th>Plazo</th>
         <th>Usuario</th>
-        {{!-- <th>Acción</th> --}}
+        <th>Acción</th>
       </tr>
     </thead>
     <tbody>
@@ -24,7 +24,7 @@
         <td><span class="font-weight-normal">{{segmento}}</span></td>
         <td><span class="font-weight-normal">{{plazo}}</span></td>
         <td><span class="font-weight-bold">{{nombre}} {{apellido}}</span></td>
-        {{!-- <td>
+        <td>
           <div class="btn-group">
             <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
@@ -34,11 +34,11 @@
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="/usuario/edit/{{_id}}"><span class="fas fa-edit mr-2"></span>Editar</a>
-              <button type="button" onclick="btnEliminar('/usuario/delete/{{_id}}')" class="dropdown-item text-danger"><span class="fas fa-trash-alt mr-2"></span>Eliminar</button>
+              <a class="dropdown-item" href="/asignacion/seguimiento/{{_id}}"><span class="fas fa-edit mr-2"></span>Seguimiento</a>
+              {{!-- <button type="button" onclick="btnEliminar('/usuario/delete/{{_id}}')" class="dropdown-item text-danger"><span class="fas fa-trash-alt mr-2"></span>Eliminar</button> --}}
             </div>
           </div>
-        </td> --}}
+        </td>
       </tr>
 
       {{/each}}

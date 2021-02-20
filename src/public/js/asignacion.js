@@ -6,7 +6,6 @@ file.addEventListener('change', async () => {
 
     const formAsignarAveria = document.querySelector('#formAsignarAveria')
     data = new FormData(formAsignarAveria)
-    console.log(data)
 
     averia.innerHTML = ''
 

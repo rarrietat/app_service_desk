@@ -86,23 +86,18 @@ asignacionCtrl.apiAsignacionById = async (req, res) => {
     res.json(asignacion)
 }
 
-asignacionCtrl.renderEditForm = async (req, res) => {
+asignacionCtrl.renderSeguimientoForm = async (req, res) => {
 
-    const horario = await Horario.findById(req.params.id).populate('usuario').lean()
-
-    const usuario = await horario.usuario[0]
-    const semanal = await horario.semanal[0]
-    const refrigerio = await semanal.refrigerio[0]
-    const finSemana = await horario.finSemana[0]
-    const refriFinSemana = await finSemana.refrigerio[0]
+    const asignacion = await Asignacion.findById(req.params.id).populate('usuario').lean()
+    asignacion.asesor = `${asignacion.usuario[0].nombre} ${asignacion.usuario[0].apellido}`
     
-    res.render('horario/editar-horario', {
-        horario, usuario, semanal, refrigerio, finSemana, refriFinSemana,
-        activeHorario: true,
+    res.render('asignacion/seguimiento', {
+        asignacion,
+        activeAsignacion: true,
         rutaActive: true,
-        ruta: 'horario',
-        nameModule: 'Horario',
-        action: 'Editar Horario'
+        ruta: 'asignacion',
+        nameModule: 'Asignación',
+        action: 'Seguimiento'
     })
 
 }
@@ -121,6 +116,23 @@ asignacionCtrl.updateAsignacion = async (req, res) => {
     
     req.flash('success_msg', 'Horario actualizado!')
     res.redirect('/horario')
+
+}
+
+asignacionCtrl.updateAsignacionHito1 = async (req, res) => {
+
+    console.log(req.body)
+
+    // const {registro_tiempo, ingreso, salida, inicioRefrigerio, finRefrigerio, diafinSemana, ingresoFinSem, salidaFinSem, inicioSemRefrigerio, finSemRefrigerio, descanso} = req.body
+    
+    // const newSemanal = {ingreso, salida, refrigerio: [{inicio: inicioRefrigerio, fin: finRefrigerio}]}
+    // const newFinSemana = {dia: diafinSemana, ingreso: ingresoFinSem, salida: salidaFinSem, refrigerio: [{inicio: inicioSemRefrigerio, fin: finSemRefrigerio}]}
+    // const newHorario = {mes, semanal: newSemanal, finSemana: newFinSemana, descanso}
+    
+    // await Horario.findByIdAndUpdate(id, newHorario)
+    
+    // req.flash('success_msg', 'Horario actualizado!')
+    // res.redirect('/horario')
 
 }
 

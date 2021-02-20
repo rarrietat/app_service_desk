@@ -37,8 +37,6 @@ usuarioGrupoGicsCtrl.allUsuariosGrupoGics = async (req, res) => {
                 }
     })
 
-    console.log(listUsuariosGrupoGics)
-
     res.render('usuario_grupogics/mostrar-usuarios_grupogics', {
         usuariosGrupoGics: listUsuariosGrupoGics,
         activeMantenimiento: true,
@@ -53,6 +51,12 @@ usuarioGrupoGicsCtrl.allUsuariosGrupoGics = async (req, res) => {
 usuarioGrupoGicsCtrl.apiUsuariosGrupoGics = async (req, res) => {
 
     const usuariosGrupoGics = await UsuarioGrupoGics.find().sort({_id: 'asc'}).lean()
+    res.json(usuariosGrupoGics)
+}
+
+usuarioGrupoGicsCtrl.apiUsuariosGrupoGicsByGrupoGics = async (req, res) => {
+
+    const usuariosGrupoGics = await UsuarioGrupoGics.find({grupo_gics: req.params.id})
     res.json(usuariosGrupoGics)
 }
 
