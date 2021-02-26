@@ -10,7 +10,8 @@ const {
     deleteAsignacion,
     uploadFileAsignacion,
     apiAsignacionById,
-    updateAsignacionHito1
+    updateAsignacionHito1,
+    updateAsignacionHito2
 } = require('../controllers/asignacion')
 
 const {isAuthenticated} = require('../helpers/auth')
@@ -24,5 +25,6 @@ router.get('/asignacion/delete/:id', deleteAsignacion)
 router.post('/asignacion/upload', uploadFileAsignacion)
 router.get('/api/asignacion/:id', apiAsignacionById)
 router.post('/api/update_hito1', updateAsignacionHito1)
+router.post('/api/update_hito2', updateAsignacionHito2)
 
 module.exports = router

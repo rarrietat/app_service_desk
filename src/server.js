@@ -70,6 +70,8 @@ app.use(require('./routes/zonal_asignado'))
 app.use(require('./routes/grupo_gics'))
 app.use(require('./routes/usuario_grupogics'))
 app.use(require('./routes/tecnico'))
+app.use(require('./routes/escalamiento'))
+app.use(require('./routes/asesor'))
 
 // Static files
 app.use(express.static(path.join(__dirname, 'public')))

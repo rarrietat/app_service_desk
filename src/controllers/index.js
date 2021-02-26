@@ -44,4 +44,12 @@ indexCtrl.renderTecnico = (req, res) => {
     res.render('tecnico')
 }
 
+indexCtrl.renderEscalamiento = (req, res) => {
+    res.render('escalamiento')
+}
+
+indexCtrl.renderAsesor = (req, res) => {
+    res.render('asesor')
+}
+
 module.exports = indexCtrl

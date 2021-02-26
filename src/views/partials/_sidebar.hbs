@@ -81,6 +81,13 @@
                     <div class="multi-level collapse {{#if activeMantenimiento}} show {{/if}}" role="list" id="submenu-mantenimiento" aria-expanded="false">
                       <ul class="flex-column nav">
 
+                        <li class="nav-item {{#if activeAsesor}} active {{/if}}">
+                          <a href="/asesor" class="nav-link">
+                            <span class="sidebar-text-contracted">A</span>
+                            <span class="sidebar-text">Asesor</span>
+                          </a>
+                        </li>
+
                         <li class="nav-item {{#if activeTecnico}} active {{/if}}">
                           <a href="/tecnico" class="nav-link">
                             <span class="sidebar-text-contracted">T</span>

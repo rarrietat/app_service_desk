@@ -2,6 +2,7 @@ const asignacionCtrl = {}
 const path = require('path')
 const XLSX = require('xlsx')
 const Asignacion = require('../models/Asignacion')
+const Hito1 = require('../models/Hito1')
 const helperFile = require('../helpers/file')
 const helperAveria = require('../helpers/averia')
 const Usuario = require('../models/Usuario')
@@ -91,8 +92,10 @@ asignacionCtrl.renderSeguimientoForm = async (req, res) => {
     const asignacion = await Asignacion.findById(req.params.id).populate('usuario').lean()
     asignacion.asesor = `${asignacion.usuario[0].nombre} ${asignacion.usuario[0].apellido}`
     
+    const hito1 = await Hito1.findById(asignacion.hito1).lean()
+
     res.render('asignacion/seguimiento', {
-        asignacion,
+        asignacion, hito1,
         activeAsignacion: true,
         rutaActive: true,
         ruta: 'asignacion',
@@ -120,19 +123,60 @@ asignacionCtrl.updateAsignacion = async (req, res) => {
 }
 
 asignacionCtrl.updateAsignacionHito1 = async (req, res) => {
+    
+    const {idHito1, idSegHito1, registro_tiempo, asesor, diag_correcto, hito1_descripcion, despacho_correcto, grupo_asignado, usuario_asignado} = req.body
+
+    const hito1 = {registro_tiempo, asesor, diag_correcto, hito1_descripcion, despacho_correcto, grupo_asignado, usuario_asignado}
+    
+    if(idHito1 != ''){
+
+        await Hito1.findByIdAndUpdate(idHito1, hito1)
+
+    }else{
+
+        const newHito1 = new Hito1(hito1)
+        await newHito1.save()
+
+        const Hito1creado = await Hito1.find().sort({ $natural: -1 }).limit(1)
+        const Hito1_id = await Hito1creado.map(e => {
+            return e.id
+        })
+        
+        await Asignacion.findByIdAndUpdate(idSegHito1, {hito1: Hito1_id})
+    }
+    
+    req.flash('success_msg', 'Hito1 registrado!')
+    res.json('ok')
+
+}
+
+asignacionCtrl.updateAsignacionHito2 = async (req, res) => {
 
     console.log(req.body)
+    
+    // const {idHito1, idSegHito1, registro_tiempo, asesor, diag_correcto, hito1_descripcion, despacho_correcto, grupo_asignado, usuario_asignado} = req.body
 
-    // const {registro_tiempo, ingreso, salida, inicioRefrigerio, finRefrigerio, diafinSemana, ingresoFinSem, salidaFinSem, inicioSemRefrigerio, finSemRefrigerio, descanso} = req.body
+    // const hito1 = {registro_tiempo, asesor, diag_correcto, hito1_descripcion, despacho_correcto, grupo_asignado, usuario_asignado}
     
-    // const newSemanal = {ingreso, salida, refrigerio: [{inicio: inicioRefrigerio, fin: finRefrigerio}]}
-    // const newFinSemana = {dia: diafinSemana, ingreso: ingresoFinSem, salida: salidaFinSem, refrigerio: [{inicio: inicioSemRefrigerio, fin: finSemRefrigerio}]}
-    // const newHorario = {mes, semanal: newSemanal, finSemana: newFinSemana, descanso}
+    // if(idHito1 != ''){
+
+    //     await Hito1.findByIdAndUpdate(idHito1, hito1)
+
+    // }else{
+
+    //     const newHito1 = new Hito1(hito1)
+    //     await newHito1.save()
+
+    //     const Hito1creado = await Hito1.find().sort({ $natural: -1 }).limit(1)
+    //     const Hito1_id = await Hito1creado.map(e => {
+    //         return e.id
+    //     })
+        
+    //     await Asignacion.findByIdAndUpdate(idSegHito1, {hito1: Hito1_id})
+    // }
     
-    // await Horario.findByIdAndUpdate(id, newHorario)
-    
-    // req.flash('success_msg', 'Horario actualizado!')
-    // res.redirect('/horario')
+    // req.flash('success_msg', 'Hito1 registrado!')
+    // res.json('ok')
 
 }
 
@@ -141,7 +185,7 @@ asignacionCtrl.deleteAsignacion = async (req, res) => {
     await Horario.findByIdAndDelete(req.params.id)
 
     req.flash('success_msg', 'Horario eliminado!')
-    res.redirect('/horario')
+    res.redirect('/asignacion')
 
 }
 

@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>Técnico</th>
+        <th>Contacto</th>
         <th>Celular</th>
         <th>Grupo</th>
         <th>Zonal</th>
@@ -13,7 +13,7 @@
     </thead>
     <tbody>
 
-      {{#each tecnicos}}
+      {{#each escalamientos}}
 
       <tr>
         <td><span class="font-weight-bold">{{formatIndex @index}}</span></td>
@@ -32,8 +32,8 @@
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="/tecnico/edit/{{_id}}"><span class="fas fa-edit mr-2"></span>Editar</a>
-              <button type="button" onclick="btnEliminar('/tecnico/delete/{{_id}}')" class="dropdown-item text-danger"><span class="fas fa-trash-alt mr-2"></span>Eliminar</button>
+              <a class="dropdown-item" href="/escalamiento/edit/{{_id}}"><span class="fas fa-edit mr-2"></span>Editar</a>
+              <button type="button" onclick="btnEliminar('/escalamiento/delete/{{_id}}')" class="dropdown-item text-danger"><span class="fas fa-trash-alt mr-2"></span>Eliminar</button>
             </div>
           </div>
         </td>

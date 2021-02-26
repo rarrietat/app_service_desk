@@ -8,7 +8,8 @@ const {
     renderEditForm,
     updateTecnico,
     deleteTecnico,
-    apiTecnicos
+    apiTecnicos,
+    apiTecnicosByGrupo
 } = require('../controllers/tecnico')
 
 const {isAuthenticated} = require('../helpers/auth')
@@ -20,5 +21,6 @@ router.get('/tecnico/edit/:id', renderEditForm)
 router.put('/tecnico/edit/:id', updateTecnico)
 router.get('/tecnico/delete/:id', deleteTecnico)
 router.get('/api/tecnicos', apiTecnicos)
+router.get('/api/tecnicos/:id', apiTecnicosByGrupo)
 
 module.exports = router

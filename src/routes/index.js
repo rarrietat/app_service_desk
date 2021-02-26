@@ -1,6 +1,6 @@
 const { Router } = require('express')
 const router = Router()
-const { renderIndex, renderAsignacion, renderUsuario, renderHorario, renderEquipo, renderRol, renderGrupoGics, renderUsuarioGrupoGics, renderEquipoAsignado, renderZonalAsignado, renderTecnico } = require('../controllers/index')
+const { renderIndex, renderAsignacion, renderUsuario, renderHorario, renderEquipo, renderRol, renderGrupoGics, renderUsuarioGrupoGics, renderEquipoAsignado, renderZonalAsignado, renderTecnico, renderAsesor, renderEscalamiento } = require('../controllers/index')
 const {isAuthenticated} = require('../helpers/auth')
 
 router.get('/', isAuthenticated, renderIndex)
@@ -14,5 +14,7 @@ router.get('/', renderZonalAsignado)
 router.get('/', renderGrupoGics)
 router.get('/', renderUsuarioGrupoGics)
 router.get('/', renderTecnico)
+router.get('/', renderEscalamiento)
+router.get('/', renderAsesor)
 
 module.exports = router

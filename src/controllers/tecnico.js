@@ -1,7 +1,7 @@
-const tecnico = {}
+const tecnicoCtrl = {}
 const Tecnico = require('../models/Tecnico')
 
-tecnico.renderTecnicoForm = (req, res) => {
+tecnicoCtrl.renderTecnicoForm = (req, res) => {
     res.render('tecnico/agregar-tecnico', {
         activeMantenimiento: true,
         activeTecnico: true,
@@ -11,7 +11,7 @@ tecnico.renderTecnicoForm = (req, res) => {
         action: 'Nuevo Técnico'})
 }
 
-tecnico.createNewTecnico = async (req, res) => {
+tecnicoCtrl.createNewTecnico = async (req, res) => {
 
     const newTecnico = new Tecnico(req.body)
     await newTecnico.save()
@@ -20,7 +20,7 @@ tecnico.createNewTecnico = async (req, res) => {
     res.redirect('/tecnico')
 }
 
-tecnico.allTecnicos = async (req, res) => {
+tecnicoCtrl.allTecnicos = async (req, res) => {
 
     const tecnicos = await Tecnico.find().sort({_id: 'asc'})
                                     .populate('equipo_asignado')
@@ -31,6 +31,7 @@ tecnico.allTecnicos = async (req, res) => {
         return {_id: cont._id,
                 nombre: cont.nombre,
                 apellido: cont.apellido,
+                celular: cont.celular,
                 grupo_gics: cont.grupo_gics[0].grupo_gics,
                 zonal_asignado: cont.zonal_asignado[0].zonal,
                 equipo_asignado: cont.equipo_asignado[0].equipo
@@ -48,13 +49,19 @@ tecnico.allTecnicos = async (req, res) => {
         btnName: 'Nuevo Técnico'})
 }
 
-tecnico.apiTecnicos = async (req, res) => {
+tecnicoCtrl.apiTecnicos = async (req, res) => {
 
     const tecnicos = await Tecnico.find().sort({_id: 'asc'}).lean()
     res.json(tecnicos)
 }
 
-tecnico.renderEditForm = async (req, res) => {
+tecnicoCtrl.apiTecnicosByGrupo = async (req, res) => {
+
+    const tecnicos = await Tecnico.find({grupo_gics: req.params.id})
+    res.json(tecnicos)
+}
+
+tecnicoCtrl.renderEditForm = async (req, res) => {
     
     const tecnico = await Tecnico.findById(req.params.id).lean()
     tecnico.equipo_asignado = tecnico.equipo_asignado[0]._id
@@ -71,7 +78,7 @@ tecnico.renderEditForm = async (req, res) => {
         action: 'Editar Técnico'})
 }
 
-tecnico.updateTecnico = async (req, res) => {
+tecnicoCtrl.updateTecnico = async (req, res) => {
     
     await Tecnico.findByIdAndUpdate(req.params.id, req.body)
 
@@ -79,7 +86,7 @@ tecnico.updateTecnico = async (req, res) => {
     res.redirect('/tecnico')
 }
 
-tecnico.deleteTecnico = async (req, res) => {
+tecnicoCtrl.deleteTecnico = async (req, res) => {
     
     await Tecnico.findByIdAndDelete(req.params.id)
 
@@ -87,4 +94,4 @@ tecnico.deleteTecnico = async (req, res) => {
     res.redirect('/tecnico')
 }
 
-module.exports = tecnico
+module.exports = tecnicoCtrl
