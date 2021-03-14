@@ -247,7 +247,8 @@ const selectLogroResultadoHito2 = document.querySelector('#logro_resultado_hito2
 
 const fechaAtencionHito2 = document.querySelector('#fecha_atencion_hito2')
 const horaAtencionHito2 = document.querySelector('#hora_atencion_hito2')
-
+const fechaAtencion2Hito2 = document.querySelector('#fecha_atencion2_hito2')
+const horaAtencion2Hito2 = document.querySelector('#hora_atencion2_hito2')
 
 const divAsignarPersonalTecnico = document.querySelector('.divAsignarPersonalTecnico')
 const divAsignarPersonalTecnico2 = document.querySelector('.divAsignarPersonalTecnico2')
@@ -256,8 +257,13 @@ const divFechaAtencion = document.querySelector('.divFechaAtencion')
 const divEscalamiento = document.querySelector('.divEscalamiento')
 const divLogroResultado = document.querySelector('.divLogroResultado')
 const divBtnAgregarEscalamiento = document.querySelector('.divBtnAgregarEscalamiento')
+const divFechaAtencion2 = document.querySelector('.divFechaAtencion2')
 
 const hito2_id = document.querySelector('#idHito2').value
+
+let choiceGrupoAsignado = ''
+let choiceGrupoAsignado2 = ''
+let choiceGrupoEscal = ''
 
 let choiceTecnicoHito2 = ''
 let choiceTecnico2Hito2 = ''
@@ -273,9 +279,9 @@ async function loadChoiceHito2() {
                 selectInformarEscalHito2.innerHTML += `<option value="${listGrupoGics._id}">${listGrupoGics.grupo_gics}</option>`
                 selectGrupoAsignado2Hito2.innerHTML += `<option value="${listGrupoGics._id}">${listGrupoGics.grupo_gics}</option>`
             })
-            new Choices(selectGrupoAsignadoHito2, {position: 'bottom'})
-            new Choices(selectInformarEscalHito2, {position: 'bottom'})
-            new Choices(selectGrupoAsignado2Hito2, {position: 'bottom'})
+            choiceGrupoAsignado = new Choices(selectGrupoAsignadoHito2, {position: 'bottom'})
+            choiceGrupoAsignado2 = new Choices(selectInformarEscalHito2, {position: 'bottom'})
+            choiceGrupoEscal = new Choices(selectGrupoAsignado2Hito2, {position: 'bottom'})
             selectInformarEscalHito2.disabled = true
             selectGrupoAsignado2Hito2.disabled = true
         })
@@ -309,6 +315,229 @@ async function loadChoiceHito2() {
 
 }
 
+async function loadChoiceHito2ToUpdate() {
+
+    const idAsigPerHito2 = document.querySelector('#idAsignarPersonalHito2').value
+    const grupo_id = document.querySelector('#idGrupoAsignadoHito2').value
+    const tecnico_id = document.querySelector('#idTecnicoHito2').value
+    const idInformarMotivoHito2 = document.querySelector('#idInformarMotivoHito2').value
+    const idLogroResultadoHito2 = document.querySelector('#idLogroResultadoHito2').value
+    
+    selectAsignarPersonal.value = idAsigPerHito2
+    selectInformarMotivo.value = idInformarMotivoHito2
+    selectLogroResultadoHito2.value = idLogroResultadoHito2
+
+    if(selectAsignarPersonal.value == 'Si'){
+
+        selectAsignarPersonal.disabled = true
+
+        selectGrupoAsignadoHito2.innerHTML = ''
+
+        await fetch(`/api/grupos_gics`)
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(listGrupoGics => {
+                
+                if(listGrupoGics._id == grupo_id){
+                    selectGrupoAsignadoHito2.innerHTML += `<option selected value="${listGrupoGics._id}">${listGrupoGics.grupo_gics}</option>`
+                }else{
+                    selectGrupoAsignadoHito2.innerHTML += `<option value="${listGrupoGics._id}">${listGrupoGics.grupo_gics}</option>`   
+                }
+            })
+            new Choices(selectGrupoAsignadoHito2, {position: 'bottom'})
+        })
+
+        inputCelularTecHito2.value = ''
+
+        await fetch(`/api/tecnicos/${grupo_id}`)
+            .then(res => res.json())
+            .then(data => {
+                data.forEach(listTecnico => {
+                    if(listTecnico._id == tecnico_id){
+                        inputCelularTecHito2.value = listTecnico.celular
+                        selectTecnicoHito2.innerHTML += `<option selected value="${listTecnico._id}">${listTecnico.nombre} ${listTecnico.apellido}</option>`
+                    }else{
+                        selectTecnicoHito2.innerHTML += `<option value="${listTecnico._id}">${listTecnico.nombre} ${listTecnico.apellido}</option>`
+                    }
+                })
+                choiceTecnicoHito2 = new Choices(selectTecnicoHito2, {position: 'bottom'})
+                selectTecnico2Hito2.disabled = true
+            })
+
+
+    }else{
+        divAsignarPersonalTecnico.className = 'divAsignarPersonalTecnico col-lg-9 col-sm-6 d-none'
+        divInformarMotivo.classList.remove('d-none')
+        selectInformarMotivo.disabled = false
+        selectGrupoAsignadoHito2.disabled = true
+        selectAsignarPersonal.disabled = true
+
+        if(selectInformarMotivo.value == '1'){
+            divAsignarPersonalTecnico2.classList.remove('d-none')
+            selectInformarMotivo.disabled = true
+            fechaAtencionHito2.disabled = false
+            horaAtencionHito2.disabled = false
+
+            const grupo_asig2 = document.querySelector('#idGrupoAsignado2Hito2').value
+
+            console.log(grupo_asig2)
+
+            selectGrupoAsignado2Hito2.innerHTML = ''
+
+                await fetch(`/api/grupos_gics`)
+                .then(res => res.json())
+                .then(data => {
+                    data.forEach(listGrupoGics => {
+                        
+                        if(listGrupoGics._id == grupo_asig2){
+                            selectGrupoAsignado2Hito2.innerHTML += `<option selected value="${listGrupoGics._id}">${listGrupoGics.grupo_gics}</option>`
+                        }else{
+                            selectGrupoAsignado2Hito2.innerHTML += `<option value="${listGrupoGics._id}">${listGrupoGics.grupo_gics}</option>`   
+                        }
+                    })
+                    new Choices(selectGrupoAsignado2Hito2, {position: 'bottom'})
+                })
+
+                inputCelularTec2Hito2.value = ''
+
+                selectTecnico2Hito2.innerHTML = ''
+
+                await fetch(`/api/tecnicos/${grupo_asig2}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        data.forEach(listTecnico => {
+                            if(listTecnico._id == tecnico_id){
+                                inputCelularTec2Hito2.value = listTecnico.celular
+                                selectTecnico2Hito2.innerHTML += `<option selected value="${listTecnico._id}">${listTecnico.nombre} ${listTecnico.apellido}</option>`
+                            }else{
+                                selectTecnico2Hito2.innerHTML += `<option value="${listTecnico._id}">${listTecnico.nombre} ${listTecnico.apellido}</option>`
+                            }
+                        })
+                        choiceTecnico2Hito2 = new Choices(selectTecnico2Hito2, {position: 'bottom'})
+                    })
+
+                divAsignarPersonalTecnico2.classList.remove('d-none')
+                selectTecnico2Hito2.disabled = false
+
+
+        }else{
+
+            selectInformarMotivo.disabled = true
+
+            await fetch(`/api/grupos_gics`)
+            .then(res => res.json())
+            .then(data => {
+                data.forEach(listGrupoGics => {
+                    selectInformarEscalHito2.innerHTML += `<option value="${listGrupoGics._id}">${listGrupoGics.grupo_gics}</option>`
+                })
+                new Choices(selectInformarEscalHito2, {position: 'bottom'})
+            })
+
+            grupo_escal = selectInformarEscalHito2.value
+
+            await fetch(`/api/escalamientos/${grupo_escal}`)
+            .then(res => res.json())
+            .then(data => {
+                data.forEach(listTecnico => {
+                    selectPersonaContacHito2.innerHTML += `<option value="${listTecnico._id}">${listTecnico.nombre} ${listTecnico.apellido}</option>`
+                })
+                choiceEscalamientoHito2 = new Choices(selectPersonaContacHito2, {position: 'bottom'})
+            })
+
+
+            divFechaAtencion.className = 'divFechaAtencion col-lg-8 col-sm-6 d-none'
+            divEscalamiento.classList.remove('d-none')
+            divBtnAgregarEscalamiento.classList.remove('d-none')
+            divLogroResultado.classList.remove('d-none')
+            selectLogroResultadoHito2.disabled = false
+            tablaEscalamiento.classList.remove('d-none')
+
+            await fetch(`/api/hito2/${hito2_id}`)
+            .then(res => res.json())
+            .then(data => {
+                const grupo_parts = data.lista_escalamiento_grupo.split(',')
+                const contacto_parts = data.lista_escalamiento_contacto.split(',')
+                const resultado_parts = data.lista_escalamiento_resultado.split(',')
+
+                for (let i = 0; i < grupo_parts.length; i++) {
+
+                    cont += 1
+
+                    const grupo = grupo_parts[i]
+                    const contacto = contacto_parts[i]
+                    const resultado = resultado_parts[i]
+
+                    if(contacto == 'Francisco Tejada' || contacto == 'Enrique Busetich' || contacto == 'Mario Segura'){
+                        fechaAtencion2Hito2.disabled = false
+                        horaAtencion2Hito2.disabled = false
+                        divFechaAtencion2.classList.remove('d-none')
+                    }
+
+                    arrayGrupo.push(grupo)
+                    arrayContacto.push(contacto)
+                    arrayResultado.push(resultado)
+
+                    tablaEscalamiento.innerHTML += `
+                                                <tbody>
+                                                        <tr>
+                                                            <td class="border-0 font-weight-bold">${grupo}<input type='hidden' id='tableEscalGrupo${cont}' name='tableEscalGrupo' value='${arrayGrupo}'></input></td>
+                                                            <td class="border-0 font-weight-bold">${contacto}<input type='hidden' id='tableEscalContacto${cont}' name='tableEscalContacto' value='${arrayContacto}'></input></td>
+                                                            <td class="border-0 font-weight-bold">${resultado}<input type='hidden' id='tableEscalResultado${cont}' name='tableEscalResultado' value='${arrayResultado}'></input></td>
+                                                        </tr>
+                                                    </tbody>
+                                                `
+                }
+            
+            })
+
+            if(selectLogroResultadoHito2.value == 'Si'){
+
+                divLogroResultado.className = 'divLogroResultado col-lg-3 col-sm-6 mb-4 d-none'
+                divBtnAgregarEscalamiento.className = 'divBtnAgregarEscalamiento col-lg-3 col-sm-6 pt-4 d-none'
+
+                const grupo_asig2 = document.querySelector('#idGrupoAsignado2Hito2').value
+
+                await fetch(`/api/grupos_gics`)
+                .then(res => res.json())
+                .then(data => {
+                    data.forEach(listGrupoGics => {
+                        
+                        if(listGrupoGics._id == grupo_asig2){
+                            selectGrupoAsignado2Hito2.innerHTML += `<option selected value="${listGrupoGics._id}">${listGrupoGics.grupo_gics}</option>`
+                        }else{
+                            selectGrupoAsignado2Hito2.innerHTML += `<option value="${listGrupoGics._id}">${listGrupoGics.grupo_gics}</option>`   
+                        }
+                    })
+                    new Choices(selectGrupoAsignado2Hito2, {position: 'bottom'})
+                })
+
+                inputCelularTec2Hito2.value = ''
+
+                selectTecnico2Hito2.innerHTML = ''
+
+                await fetch(`/api/tecnicos/${grupo_id}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        data.forEach(listTecnico => {
+                            if(listTecnico._id == tecnico_id){
+                                inputCelularTec2Hito2.value = listTecnico.celular
+                                selectTecnico2Hito2.innerHTML += `<option selected value="${listTecnico._id}">${listTecnico.nombre} ${listTecnico.apellido}</option>`
+                            }else{
+                                selectTecnico2Hito2.innerHTML += `<option value="${listTecnico._id}">${listTecnico.nombre} ${listTecnico.apellido}</option>`
+                            }
+                        })
+                        choiceTecnico2Hito2 = new Choices(selectTecnico2Hito2, {position: 'bottom'})
+                    })
+
+                divAsignarPersonalTecnico2.classList.remove('d-none')
+                selectTecnico2Hito2.disabled = false
+            }
+        }
+
+    }
+
+}
+
 selectAsignarPersonal.addEventListener('change', async() => {
 
     if(selectAsignarPersonal.value == 'No'){
@@ -318,9 +547,10 @@ selectAsignarPersonal.addEventListener('change', async() => {
         horaAtencionHito2.disabled = false
         selectGrupoAsignadoHito2.disabled = true
         selectTecnicoHito2.disabled = true
-        selectGrupoAsignado2Hito2.disabled = true
-        selectTecnico2Hito2.disabled = true
+        selectGrupoAsignado2Hito2.disabled = false
+        selectTecnico2Hito2.disabled = false
         divInformarMotivo.classList.remove('d-none')
+        divAsignarPersonalTecnico2.classList.remove('d-none')
     }else{
         divInformarMotivo.className = 'divInformarMotivo col-lg-9 col-sm-6 d-none'
         divBtnAgregarEscalamiento.className = 'divBtnAgregarEscalamiento col-lg-3 col-sm-6 pt-4 d-none'
@@ -328,8 +558,8 @@ selectAsignarPersonal.addEventListener('change', async() => {
         selectInformarMotivo.value = '1'
         divEscalamiento.className = 'divEscalamiento col-lg-8 col-sm-6 d-none'
         selectLogroResultadoHito2.value = 'Si'
-        divLogroResultado.className = 'divLogroResultado col-lg-3 col-sm-6 d-none'
-        divAsignarPersonalTecnico2.className = 'divAsignarPersonalTecnico2 col-lg-9 col-sm-6 d-none'
+        divLogroResultado.className = 'divLogroResultado col-lg-3 col-sm-6 mb-4 d-none'
+        divAsignarPersonalTecnico2.className = 'divAsignarPersonalTecnico2 col-lg-12 col-sm-6 mt-4 d-none'
         divFechaAtencion.classList.remove('d-none')
         selectLogroResultadoHito2.disabled = true
         selectInformarEscalHito2.disabled = true
@@ -346,13 +576,74 @@ selectAsignarPersonal.addEventListener('change', async() => {
 selectInformarMotivo.addEventListener('change', async() => {
 
     if(selectInformarMotivo.value == '2'){
+        
+        choiceGrupoAsignado.destroy()
+        choiceGrupoAsignado2.destroy()
+        choiceGrupoEscal.destroy()
+        choiceEscalamientoHito2.destroy()
+        choiceTecnicoHito2.destroy()
+        choiceTecnico2Hito2.destroy()
+
+        selectInformarEscalHito2.disabled = false
+        selectPersonaContacHito2.disabled = false
+
+        selectGrupoAsignadoHito2.innerHTML = ''
+        selectInformarEscalHito2.innerHTML = ''
+        selectGrupoAsignado2Hito2.innerHTML = ''
+
+        await fetch(`/api/grupos_gics`)
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(listGrupoGics => {
+                selectGrupoAsignadoHito2.innerHTML += `<option value="${listGrupoGics._id}">${listGrupoGics.grupo_gics}</option>`
+                selectInformarEscalHito2.innerHTML += `<option value="${listGrupoGics._id}">${listGrupoGics.grupo_gics}</option>`
+                selectGrupoAsignado2Hito2.innerHTML += `<option value="${listGrupoGics._id}">${listGrupoGics.grupo_gics}</option>`
+            })
+            choiceGrupoAsignado = new Choices(selectGrupoAsignadoHito2, {position: 'bottom'})
+            choiceGrupoAsignado2 = new Choices(selectInformarEscalHito2, {position: 'bottom'})
+            selectGrupoAsignado2Hito2.disabled = false
+            choiceGrupoEscal = new Choices(selectGrupoAsignado2Hito2, {position: 'bottom'})
+            
+        })
+
+        const grupo_id = await selectGrupoAsignadoHito2.value
+        inputCelularTecHito2.value = ''
+
+        selectTecnicoHito2.innerHTML = ''
+        selectTecnico2Hito2.innerHTML = ''
+        await fetch(`/api/tecnicos/${grupo_id}`)
+            .then(res => res.json())
+            .then(data => {
+                inputCelularTecHito2.value = data[0].celular
+                inputCelularTec2Hito2.value = data[0].celular
+                data.forEach(listTecnico => {
+                    selectTecnicoHito2.innerHTML += `<option value="${listTecnico._id}">${listTecnico.nombre} ${listTecnico.apellido}</option>`
+                    selectTecnico2Hito2.innerHTML += `<option value="${listTecnico._id}">${listTecnico.nombre} ${listTecnico.apellido}</option>`
+                })
+                choiceTecnicoHito2 = new Choices(selectTecnicoHito2, {position: 'bottom'})
+                choiceTecnico2Hito2 = new Choices(selectTecnico2Hito2, {position: 'bottom'})
+                selectTecnicoHito2.disabled = true
+            })
+
+        selectPersonaContacHito2.innerHTML = ''
+
+        await fetch(`/api/escalamientos/${grupo_id}`)
+            .then(res => res.json())
+            .then(data => {
+                data.forEach(listTecnico => {
+                    selectPersonaContacHito2.innerHTML += `<option value="${listTecnico._id}">${listTecnico.nombre} ${listTecnico.apellido}</option>`
+                })
+                choiceEscalamientoHito2 = new Choices(selectPersonaContacHito2, {position: 'bottom'})
+            })
+
+        selectLogroResultadoHito2.value = 'Si'
         divFechaAtencion.className = 'divFechaAtencion col-lg-8 col-sm-6 d-none'
         divEscalamiento.classList.remove('d-none')
         divLogroResultado.classList.remove('d-none')
         divAsignarPersonalTecnico2.classList.remove('d-none')
+        divBtnAgregarEscalamiento.classList.remove('d-none')
         selectLogroResultadoHito2.disabled = false
         selectGrupoAsignado2Hito2.disabled = false
-        selectTecnico2Hito2.disabled = false
         selectInformarEscalHito2.disabled = false
         selectPersonaContacHito2.disabled = false
         fechaAtencionHito2.disabled = true
@@ -360,8 +651,21 @@ selectInformarMotivo.addEventListener('change', async() => {
     }else{
         divEscalamiento.className = 'divEscalamiento col-lg-8 col-sm-6 d-none'
         divLogroResultado.className = 'divLogroResultado col-lg-3 col-sm-6 mb-4 d-none'
-        divAsignarPersonalTecnico2.className = 'divAsignarPersonalTecnico2 col-lg-9 col-sm-6 d-none'
+        divAsignarPersonalTecnico2.className = 'divAsignarPersonalTecnico2 col-lg-12 col-sm-6 mt-4 d-none'
+        divBtnAgregarEscalamiento.className = 'divBtnAgregarEscalamiento col-lg-3 col-sm-6 pt-4 d-none'
         divFechaAtencion.classList.remove('d-none')
+        divAsignarPersonalTecnico2.classList.remove('d-none')
+        selectInformarEscalHito2.disabled = true
+        selectPersonaContacHito2.disabled = true
+        selectLogroResultadoHito2.disabled = true
+        fechaAtencionHito2.disabled = false
+        horaAtencionHito2.disabled = false
+        choiceGrupoAsignado.destroy()
+        choiceGrupoAsignado2.destroy()
+        choiceGrupoEscal.destroy()
+        choiceEscalamientoHito2.destroy()
+        choiceTecnicoHito2.destroy()
+        choiceTecnico2Hito2.destroy()
         
     }
 
@@ -370,12 +674,10 @@ selectInformarMotivo.addEventListener('change', async() => {
 selectLogroResultadoHito2.addEventListener('change', async() => {
 
     if(selectLogroResultadoHito2.value == 'No'){
-        divAsignarPersonalTecnico2.className = 'divAsignarPersonalTecnico2 col-lg-9 col-sm-6 d-none'
-        divBtnAgregarEscalamiento.classList.remove('d-none')
+        divAsignarPersonalTecnico2.className = 'divAsignarPersonalTecnico2 col-lg-12 col-sm-6 mt-4 d-none'
         selectGrupoAsignado2Hito2.disabled = true
         selectTecnico2Hito2.disabled = true
     }else{
-        divBtnAgregarEscalamiento.className = 'divBtnAgregarEscalamiento col-lg-3 col-sm-6 pt-4 d-none'
         divAsignarPersonalTecnico2.classList.remove('d-none')
         selectGrupoAsignado2Hito2.disabled = false
         selectTecnico2Hito2.disabled = false
@@ -413,11 +715,62 @@ selectInformarEscalHito2.addEventListener('change', async () => {
     await fetch(`/api/escalamientos/${grupo_id}`)
         .then(res => res.json())
         .then(data => {
-            data.forEach(listTecnico => {
-                selectPersonaContacHito2.innerHTML += `<option value="${listTecnico._id}">${listTecnico.nombre} ${listTecnico.apellido}</option>`
+            data.forEach(listContacto => {
+                selectPersonaContacHito2.innerHTML += `<option value="${listContacto._id}">${listContacto.nombre} ${listContacto.apellido}</option>`
             })
             choiceEscalamientoHito2 = new Choices(selectPersonaContacHito2, {position: 'bottom'})
         })
+
+})
+
+selectPersonaContacHito2.addEventListener('change', async () => {
+
+    const contacto_id = await selectPersonaContacHito2.value
+    const idLogroResultadoHito2 = document.querySelector('#idLogroResultadoHito2').value
+
+    if(contacto_id == '6042bea01c9a152cec8d62d1' || contacto_id == '6042beaf1c9a152cec8d62d2' || contacto_id == '6042bec11c9a152cec8d62d3'){
+        divBtnAgregarEscalamiento.className = 'divBtnAgregarEscalamiento col-lg-3 col-sm-6 pt-4 d-none'
+        divAsignarPersonalTecnico2.classList.remove('d-none')
+        divFechaAtencion2.classList.remove('d-none')
+        fechaAtencion2Hito2.disabled = false
+        horaAtencion2Hito2.disabled = false
+        selectGrupoAsignado2Hito2.disabled = false
+        selectTecnico2Hito2.disabled = false
+        selectLogroResultadoHito2.value = 'Si'
+        btnAgregarTabla()
+
+        divLogroResultado.className = 'divLogroResultado col-lg-3 col-sm-6 mb-4 d-none'
+
+        if(idLogroResultadoHito2 == ''){
+            choiceGrupoEscal.destroy()
+            choiceTecnico2Hito2.destroy()
+        }
+
+        selectGrupoAsignado2Hito2.innerHTML = ''
+
+        await fetch(`/api/grupos_gics`)
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(listGrupoGics => {
+                selectGrupoAsignado2Hito2.innerHTML += `<option value="${listGrupoGics._id}">${listGrupoGics.grupo_gics}</option>`
+            })
+            choiceGrupoAsignado2 = new Choices(selectGrupoAsignado2Hito2, {position: 'bottom'})
+        })
+
+        const grupo_id = selectGrupoAsignado2Hito2.value
+        inputCelularTecHito2.value = ''
+        selectTecnico2Hito2.innerHTML = ''
+        
+        await fetch(`/api/tecnicos/${grupo_id}`)
+            .then(res => res.json())
+            .then(data => {
+                inputCelularTec2Hito2.value = data[0].celular
+                data.forEach(listTecnico => {
+                    selectTecnico2Hito2.innerHTML += `<option value="${listTecnico._id}">${listTecnico.nombre} ${listTecnico.apellido}</option>`
+                })
+                choiceTecnico2Hito2 = new Choices(selectTecnico2Hito2, {position: 'bottom'})
+            })
+    }
 
 })
 
@@ -492,25 +845,66 @@ function btnAgregarTabla(){
     const resultado = selectLogroResultadoHito2.options[selectLogroResultadoHito2.selectedIndex].text
     newEscalamiento = new Escalamiento(grupo, contacto, resultado)
     agregarBase()
+    tablaEscalamiento.classList.remove('d-none')
 }
 
+const tablaEscalamiento = document.querySelector('#TablaEscalamiento')
+const demo = document.querySelector('#escalamientoshito2')
+let cont = 0
+
+var arrayGrupo = new Array()
+var arrayContacto = new Array()
+var arrayResultado = new Array()
+
 function agregarBase(){
+    const grupo = selectInformarEscalHito2.options[selectInformarEscalHito2.selectedIndex].text
+    const contacto = selectPersonaContacHito2.options[selectPersonaContacHito2.selectedIndex].text
+    const resultado = selectLogroResultadoHito2.options[selectLogroResultadoHito2.selectedIndex].text
+    cont += 1
     baseDatos.push(newEscalamiento)
-    document.querySelector('#TablaEscalamiento').innerHTML += `
+    arrayGrupo.push(grupo)
+    arrayContacto.push(contacto)
+    arrayResultado.push(resultado)
+
+
+    tablaEscalamiento.innerHTML += `
     <tbody>
             <tr>
-                <td class="border-0 font-weight-bold">${newEscalamiento.grupo}</td>
-                <td class="border-0 font-weight-bold">${newEscalamiento.contacto}</td>
-                <td class="border-0 font-weight-bold">${newEscalamiento.resultado}</td>
+                <td class="border-0 font-weight-bold">${newEscalamiento.grupo}<input type='hidden' id='tableEscalGrupo${cont}' name='tableEscalGrupo' value='${arrayGrupo}'></input></td>
+                <td class="border-0 font-weight-bold">${newEscalamiento.contacto}<input type='hidden' id='tableEscalContacto${cont}' name='tableEscalContacto' value='${arrayContacto}'></input></td>
+                <td class="border-0 font-weight-bold">${newEscalamiento.resultado}<input type='hidden' id='tableEscalResultado${cont}' name='tableEscalResultado' value='${arrayResultado}'></input></td>
             </tr>
         </tbody>
     `
+
+    selectAsignarPersonal.disabled = true
+    selectInformarMotivo.disabled = true
 }
 
 const formHito2 = document.querySelector('#formHito2')
 
 formHito2.addEventListener("submit", async function (e) {
     e.preventDefault()
+
+    const idAsigPerHito2 = document.querySelector('#idAsignarPersonalHito2').value
+    const idInformarMotivoHito2 = document.querySelector('#idInformarMotivoHito2').value
+    const idLogroResultadoHito2 = document.querySelector('#idLogroResultadoHito2').value
+
+    console.log(idLogroResultadoHito2)
+
+    if(idAsigPerHito2 == 'Si' || idAsigPerHito2 == 'No'){
+        selectAsignarPersonal.disabled = false
+    }
+
+    if(idInformarMotivoHito2 == '1' || idInformarMotivoHito2 == '2'){
+        selectInformarMotivo.disabled = false
+    }
+
+    if(selectLogroResultadoHito2.value == 'No' || selectLogroResultadoHito2.value == 'Si'){
+        selectAsignarPersonal.disabled = false
+        selectInformarMotivo.disabled = false
+    }
+
 
     data = new FormData(formHito2)
     const object = {}

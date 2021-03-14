@@ -22,6 +22,10 @@ const AsignacionSchema = new Schema({
     hito1:[{
         type: Schema.Types.ObjectId,
         ref: 'Hito1'
+    }],
+    hito2:[{
+        type: Schema.Types.ObjectId,
+        ref: 'Hito2'
     }]
 }, {
     timestamps: true
