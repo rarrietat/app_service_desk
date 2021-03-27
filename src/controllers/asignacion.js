@@ -173,17 +173,22 @@ asignacionCtrl.updateAsignacionHito2 = async (req, res) => {
     console.log(req.body)
 
     let hito2 = ''
-    let {idHito2, idSegHito2, asignar_personal_hito2, grupo_asignado_hito2, tecnico_hito2, informar_motivo_hito2, fecha_atencion_hito2, hora_atencion_hito2, fecha_atencion2_hito2, hora_atencion2_hito2, informar_escalamiento_hito2, persona_contacto_hito2, logro_resultado_hito2, grupo_asignado2_hito2, tecnico2_hito2, tableEscalGrupo, tableEscalContacto, tableEscalResultado} = req.body
+    let {idHito2, idSegHito2, asignar_personal_hito2, grupo_asignado_hito2, tecnico_hito2, informar_motivo_hito2, fecha_atencion_hito2, hora_atencion_hito2, sin_fecha_hito2, fecha_atencion2_hito2, hora_atencion2_hito2, logro_resultado_hito2, grupo_asignado2_hito2, tecnico2_hito2, tableEscalGrupo, tableEscalContacto, tableEscalResultado} = req.body
     let fechaParts = ''
     let fecha_atencion = ''
+    
     if(asignar_personal_hito2 === 'Si'){
         hito2 = {asignar_personal: asignar_personal_hito2, grupo_asignado: grupo_asignado_hito2, tecnico_asignado: tecnico_hito2}
     }else{
 
         if(informar_motivo_hito2 === '1'){
-            fechaParts = fecha_atencion_hito2.split('/')
-            fecha_atencion = dayjs(`${fechaParts[2]}-${fechaParts[1]}-${fechaParts[0]} ${hora_atencion_hito2}`).format()
-            hito2 = {asignar_personal: asignar_personal_hito2, informar_motivo: informar_motivo_hito2, fecha_atencion, grupo_asignado: grupo_asignado2_hito2, tecnico_asignado: tecnico2_hito2}
+            if(sin_fecha_hito2 == 'on'){
+                hito2 = {asignar_personal: asignar_personal_hito2, informar_motivo: informar_motivo_hito2, status_chb: 'on', grupo_asignado: grupo_asignado2_hito2, tecnico_asignado: tecnico2_hito2}
+            }else{
+                fechaParts = fecha_atencion_hito2.split('/')
+                fecha_atencion = dayjs(`${fechaParts[2]}-${fechaParts[1]}-${fechaParts[0]} ${hora_atencion_hito2}`).format()
+                hito2 = {asignar_personal: asignar_personal_hito2, informar_motivo: informar_motivo_hito2, status_chb: 'off', fecha_atencion, grupo_asignado: grupo_asignado2_hito2, tecnico_asignado: tecnico2_hito2}
+            }
         }else{
             if(logro_resultado_hito2 === 'Si'){
                 if(fecha_atencion2_hito2 != undefined){
@@ -200,6 +205,7 @@ asignacionCtrl.updateAsignacionHito2 = async (req, res) => {
         }
 
     }
+    console.log(hito2)
 
     if(idHito2 != ''){
 

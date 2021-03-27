@@ -282,7 +282,8 @@
 
                                                 <div class="col-lg-4 col-sm-6 mb-4">
                                                     <label for="tecnico_hito2">Personal Técnico Asignado</label>
-                                                    <input type="hidden" id="idTecnicoHito2" value="{{hito2.tecnico_asignado}}">
+                                                    <input type="hidden" id="idTecnicoHito2"
+                                                        value="{{hito2.tecnico_asignado}}">
                                                     <select id="tecnico_hito2" name="tecnico_hito2" class="form-select">
                                                     </select>
                                                 </div>
@@ -303,7 +304,7 @@
 
                                                 <div class="col-lg-4 col-sm-6 mb-4">
                                                     <input type="hidden" id="idInformarMotivoHito2"
-                                                    value="{{hito2.informar_motivo}}">
+                                                        value="{{hito2.informar_motivo}}">
                                                     <label for="informar_motivo_hito2">Informar Motivo</label>
                                                     <select id="informar_motivo_hito2" name="informar_motivo_hito2"
                                                         class="form-select" disabled>
@@ -324,7 +325,8 @@
                                                                 <input data-datepicker="" class="form-control"
                                                                     id="fecha_atencion_hito2"
                                                                     name="fecha_atencion_hito2" type="text"
-                                                                    placeholder="dd/mm/aaaa" value="{{hito2.fecha}}" disabled>
+                                                                    placeholder="dd/mm/aaaa" value="{{hito2.fecha}}"
+                                                                    disabled>
                                                             </div>
                                                         </div>
 
@@ -335,8 +337,10 @@
                                                                 value="{{hito2.hora}}" disabled>
                                                         </div>
 
-                                                        <div class="col-lg-4 col-sm-6 mb-4">
+                                                        <div class="divCheckBox col-lg-4 col-sm-6 mb-4">
                                                             <div class="form-check">
+                                                                <input type="hidden" id="statusChb"
+                                                                    value="{{hito2.status_chb}}">
                                                                 <input class="form-check-input" type="checkbox"
                                                                     id="sin_fecha_hito2" name="sin_fecha_hito2">
                                                                 <label class="form-check-label" for="sin_fecha_hito2">
@@ -378,7 +382,7 @@
 
                                         <div class="divLogroResultado col-lg-3 col-sm-6 mb-4 d-none">
                                             <input type="hidden" id="idLogroResultadoHito2"
-                                                    value="{{hito2.logro_resultado}}">
+                                                value="{{hito2.logro_resultado}}">
                                             <label for="logro_resultado_hito2">¿Se logró Resultado?</label>
                                             <select id="logro_resultado_hito2" name="logro_resultado_hito2"
                                                 class="form-select" disabled>
@@ -389,13 +393,15 @@
 
                                         <div class="divBtnAgregarEscalamiento col-lg-3 col-sm-6 pt-4 d-none">
                                             <button type="button" class="btn btn-success float-left"
-                                                onclick="btnAgregarTabla()">Agregar Escalamiento</button>
+                                                onclick="btnAgregarTabla(selectInformarEscalHito2, selectPersonaContacHito2, selectLogroResultadoHito2, tablaEscalamiento)">Agregar Escalamiento</button>
                                         </div>
 
                                     </div>
-                                    
+
                                     <div class="table-responsive">
-                                        <table id="TablaEscalamiento" class="table table-sm table-centered table-nowrap table-striped mb-0 rounded w-75 d-none" style="margin: auto;">
+                                        <table id="tablaEscalamiento"
+                                            class="table table-sm table-centered table-nowrap table-striped mb-0 rounded w-75 d-none"
+                                            style="margin: auto;">
                                             <thead class="thead-dark">
                                                 <tr>
                                                     <th class="border-0">Escalamiento</th>
@@ -408,61 +414,58 @@
 
                                     <div class="divAsignarPersonalTecnico2 col-lg-12 col-sm-6 mt-4 d-none">
 
-                                            <div class="row">
-                                                <div class="col-lg-3 col-sm-6 mb-4">
-                                                    <label for="grupo_asignado2_hito2">Grupo Asignado</label>
-                                                    <input type="hidden" id="idGrupoAsignado2Hito2"
-                                                        value="{{hito2.grupo_asignado}}">
-                                                    <select id="grupo_asignado2_hito2" name="grupo_asignado2_hito2"
-                                                        class="form-select">
-                                                    </select>
-                                                </div>
+                                        <div class="row">
+                                            <div class="col-lg-3 col-sm-6 mb-4">
+                                                <label for="grupo_asignado2_hito2">Grupo Asignado</label>
+                                                <input type="hidden" id="idGrupoAsignado2Hito2"
+                                                    value="{{hito2.grupo_asignado}}">
+                                                <select id="grupo_asignado2_hito2" name="grupo_asignado2_hito2"
+                                                    class="form-select">
+                                                </select>
+                                            </div>
 
-                                                <div class="col-lg-3 col-sm-6 mb-4">
-                                                    <label for="tecnico2_hito2">Personal Técnico Asignado</label>
-                                                    <select id="tecnico2_hito2" name="tecnico2_hito2" 
-                                                        class="form-select">
-                                                    </select>
-                                                </div>
+                                            <div class="col-lg-3 col-sm-6 mb-4">
+                                                <label for="tecnico2_hito2">Personal Técnico Asignado</label>
+                                                <select id="tecnico2_hito2" name="tecnico2_hito2" class="form-select">
+                                                </select>
+                                            </div>
 
-                                                <div class="col-lg-2 col-sm-6 mb-4">
-                                                    <label for="celular_tecnico2_hito2">Celular Técnico</label>
-                                                    <input type="text" class="form-control" id="celular_tecnico2_hito2"
-                                                        name="celular_tecnico2_hito2" value="{{hito2.celular}}"
-                                                        disabled>
-                                                </div>
+                                            <div class="col-lg-2 col-sm-6 mb-4">
+                                                <label for="celular_tecnico2_hito2">Celular Técnico</label>
+                                                <input type="text" class="form-control" id="celular_tecnico2_hito2"
+                                                    name="celular_tecnico2_hito2" value="{{hito2.celular}}" disabled>
+                                            </div>
 
-                                                <div class="divFechaAtencion2 col-lg-4 col-sm-6 d-none">
-                                                    <div class="row">
-                                                        <div class="col-lg-7 col-sm-6 mb-4">
-                                                                <label for="fecha_atencion2_hito2">Fecha de Asignación</label>
-                                                                <div class="input-group">
-                                                                    <span class="input-group-text"><span
-                                                                            class="far fa-calendar-alt"></span></span>
-                                                                    <input data-datepicker="" class="form-control"
-                                                                        id="fecha_atencion2_hito2"
-                                                                        name="fecha_atencion2_hito2" type="text"
-                                                                        placeholder="dd/mm/aaaa" value="{{hito2.fecha}}" disabled>
-                                                                </div>
-                                                            </div>
-                                                        
-                                                            <div class="col-lg-5 col-sm-6">
-                                                                <label for="hora_atencion2_hito2">Hora Asignac.</label>
-                                                                <input type="time" class="form-control"
-                                                                    id="hora_atencion2_hito2" name="hora_atencion2_hito2"
-                                                                    value="{{hito2.hora}}" disabled>
-                                                            </div>
+                                            <div class="divFechaAtencion2 col-lg-4 col-sm-6 d-none">
+                                                <div class="row">
+                                                    <div class="col-lg-7 col-sm-6 mb-4">
+                                                        <label for="fecha_atencion2_hito2">Fecha de Asignación</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text"><span
+                                                                    class="far fa-calendar-alt"></span></span>
+                                                            <input data-datepicker="" class="form-control"
+                                                                id="fecha_atencion2_hito2" name="fecha_atencion2_hito2"
+                                                                type="text" placeholder="dd/mm/aaaa"
+                                                                value="{{hito2.fecha}}" disabled>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-5 col-sm-6">
+                                                        <label for="hora_atencion2_hito2">Hora Asignac.</label>
+                                                        <input type="time" class="form-control"
+                                                            id="hora_atencion2_hito2" name="hora_atencion2_hito2"
+                                                            value="{{hito2.hora}}" disabled>
                                                     </div>
                                                 </div>
-
-
                                             </div>
+
+
+                                        </div>
 
                                     </div>
 
                                     <div class="mt-3">
                                         <button type="submit" class="btn btn-primary float-right">Guardar</button>
-                                        {{!-- <button type="submit" class="btn btn-primary float-right">Guardar</button> --}}
                                     </div>
                                 </div>
                             </div>
@@ -485,14 +488,224 @@
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
             data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum obcaecati omnis at ipsum, unde itaque
-                sequi commodi, cumque repellat fugit veritatis ratione. Voluptatum at necessitatibus a, perspiciatis
-                placeat alias earum fugit ab neque dolore dolor debitis. Iste fuga veniam deleniti illum accusantium
-                doloribus corporis et, harum odio minima laudantium dolorem non saepe eligendi ea reiciendis debitis
-                repudiandae a sed rerum aliquam! Exercitationem, odit dolor. Officia ducimus dolore ratione suscipit?
-                Minus necessitatibus animi totam eligendi earum explicabo eius, iure commodi repellendus rerum
-                praesentium ab, doloribus deleniti corporis quidem doloremque esse quae! Rerum molestiae quae eligendi
-                nostrum tempore quos dolor nobis dicta!
+
+                <form id="formHito3" autocomplete="off">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card border-light shadow-sm components-section">
+                                <div class="card-body">
+                                    <div class="row mb-0">
+
+                                        <div class="col-lg-3 col-sm-6">
+
+                                            <input type="hidden" name="idSegHito3" value="{{asignacion._id}}">
+
+                                            <input type="hidden" id="idHito3" name="idHito3"
+                                                value="{{asignacion.hito3}}">
+
+                                            <div class="mb-4">
+                                                <input type="hidden" id="idAsignarPersonalHito3"
+                                                    value="{{hito3.requiere_dezplazamiento}}">
+                                                <label for="req_desplaz_hito3">¿Requiere desplazamiento técnico?</label>
+                                                <select id="req_desplaz_hito3" name="req_desplaz_hito3"
+                                                    class="form-select">
+                                                    <option value="Si">Si</option>
+                                                    <option value="No">No</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="divDesplazarPersonalTecnico col-lg-4 col-sm-6 mb-4">
+
+                                            <label for="horario_acordado_hito3">¿Se desplazó Técnico en
+                                                el horario acordado?</label>
+                                            <input type="hidden" id="idHorarioAsignadoHito3"
+                                                value="{{hito3.desplazamiento}}">
+                                            <select id="horario_acordado_hito3" name="horario_acordado_hito3"
+                                                class="form-select">
+                                                <option value="Si">Si</option>
+                                                <option value="No">No</option>
+                                            </select>
+
+                                        </div>
+
+                                        <div class="divDesplazamientoSi col-lg-5 col-sm-6">
+
+                                            {{!-- <div class="col-lg-12 col-sm-6 mb-4">
+                                                <label for="tecnico_asignado_hito3">Personal Técnico Asignado</label>
+                                                <input type="text" class="form-control" id="tecnico_asignado_hito3"
+                                                    name="tecnico_asignado_hito3" disabled>
+                                            </div> --}}
+
+                                            <div class="row">
+
+                                                <div class="col-lg-6 col-sm-6 mb-4">
+                                                    <label for="tecnico_hito3">Personal Técnico Asignado</label>
+                                                    <input type="hidden" id="idGrupoAsignadoHito3"
+                                                        value="{{hito2.grupo_asignado}}">
+                                                    <input type="hidden" id="idTecnicoHito3"
+                                                        value="{{hito2.tecnico_asignado}}">
+                                                    <select id="tecnico_hito3" name="tecnico_hito3" class="form-select">
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-lg-6 col-sm-6 mb-4">
+                                                    <label for="celular_tecnico_hito3">Celular Técnico
+                                                        Asignado</label>
+                                                    <input type="text" class="form-control" id="celular_tecnico_hito3"
+                                                        name="celular_tecnico_hito3" disabled>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-6 col-sm-6 mb-4">
+
+                                                    <label for="fecha_llegada_hito3">Fecha de llegada</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text"><span
+                                                                class="far fa-calendar-alt"></span></span>
+                                                        <input data-datepicker="" class="form-control"
+                                                            id="fecha_llegada_hito3" name="fecha_llegada_hito3"
+                                                            type="text" placeholder="dd/mm/aaaa"
+                                                            value="{{hito3.fecha}}">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6 col-sm-6 mb-4">
+                                                    <label for="hora_llegada_hito3">Hora de llegada</label>
+                                                    <input type="time" class="form-control" id="hora_llegada_hito3"
+                                                        name="hora_llegada_hito3" value="{{hito3.hora}}">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="divDesplazamientoNo col-lg-5 col-sm-6 d-none">
+
+                                            <div class="col-lg-12 col-sm-6 mb-4">
+                                                <label for="tecnico_responde_hito3">Personal Técnico Asignado
+                                                    Responde</label>
+                                                <input type="hidden" id="idTecnicoRespondeHito3"
+                                                    value="{{hito3.tecnico_responde}}">
+                                                <select id="tecnico_responde_hito3" name="tecnico_responde_hito3"
+                                                    class="form-select">
+                                                    <option value="Si">Si</option>
+                                                    <option value="No">No</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="divTecnicoRespondeSi d-none">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-sm-6 mb-4">
+
+                                                    <label for="fecha_llegada2_hito3">Fecha de llegada</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text"><span
+                                                                class="far fa-calendar-alt"></span></span>
+                                                        <input data-datepicker="" class="form-control"
+                                                            id="fecha_llegada2_hito3" name="fecha_llegada2_hito3"
+                                                            type="text" placeholder="dd/mm/aaaa"
+                                                            value="{{hito3.fecha}}">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-4 col-sm-6 mb-4">
+                                                    <label for="hora_llegada2_hito3">Hora de llegada</label>
+                                                    <input type="time" class="form-control" id="hora_llegada2_hito3"
+                                                        name="hora_llegada2_hito3" value="{{hito3.hora}}">
+                                                </div>
+
+                                                <div class="col-lg-4 col-sm-6 mb-4">
+                                                    <label for="horario_indicado_hito3">¿Técnico llegó en horario
+                                                        indicado?</label>
+                                                    <input type="hidden" id="idHorarioIndicadoHito3"
+                                                        value="{{hito3.horario_indicado}}">
+                                                    <select id="horario_indicado_hito3" name="horario_indicado_hito3"
+                                                        class="form-select">
+                                                        <option value="Si">Si</option>
+                                                        <option value="No">No</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+
+
+                                        <div class="divTecnicoRespondeNo d-none">
+
+                                            <div class="row">
+
+                                                <div class="col-lg-3 col-sm-6 mb-4">
+                                                    <label for="informar_escalamiento_hito3">Informar
+                                                        Escalamiento</label>
+                                                    <select id="informar_escalamiento_hito3"
+                                                        name="informar_escalamiento_hito3" class="form-select">
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-lg-3 col-sm-6 mb-4">
+                                                    <label for="persona_contacto_hito3">Persona de
+                                                        Contacto</label>
+                                                    <select id="persona_contacto_hito3" name="persona_contacto_hito3"
+                                                        class="form-select">
+                                                    </select>
+                                                </div>
+
+                                                <div class="divLogroResultadoHito3 col-lg-3 col-sm-6 mb-4">
+                                                    <input type="hidden" id="idLogroResultadoHito3"
+                                                        value="{{hito3.logro_resultado}}">
+                                                    <label for="logro_resultado_hito3">¿Se logró Resultado?</label>
+                                                    <select id="logro_resultado_hito3" name="logro_resultado_hito3"
+                                                        class="form-select">
+                                                        <option value="Si">Si</option>
+                                                        <option value="No">No</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="divBtnAgregarEscalamientoHito3 col-lg-3 col-sm-6 pt-4">
+                                                    <button type="button" class="btn btn-success float-right"
+                                                        onclick="btnAgregarTabla(SelectEscalamientoHito3, selectContactoHito3, selectLogroResultadoHito3, tablaEscalamiento2)">Agregar Escalamiento</button>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="table-responsive">
+                                            <table id="tablaEscalamiento2"
+                                                class="table table-sm table-centered table-nowrap table-striped mb-0 rounded w-75 d-none"
+                                                style="margin: auto;">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th class="border-0">Escalamiento</th>
+                                                        <th class="border-0">Persona de Contacto</th>
+                                                        <th class="border-0">Resultado</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <div class="mt-3">
+                                        <button type="submit" class="btn btn-primary float-right">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </form>
+
             </div>
         </div>
     </div>

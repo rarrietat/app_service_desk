@@ -1,6 +1,6 @@
 const {Schema, model } = require('mongoose')
 
-const Hito1Schema = new Schema({
+const Hito2Schema = new Schema({
     asignar_personal: String,
     grupo_asignado: [{
         type: Schema.Types.ObjectId,
@@ -11,16 +11,9 @@ const Hito1Schema = new Schema({
         ref: 'Tecnico'
     }],
     informar_motivo: String,
+    status_chb: String,
     fecha_atencion: Date,
     logro_resultado: String,
-    // grupo_asignado2: [{
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'GrupoGics'
-    // }],
-    // tecnico_asignado2: [{
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'Tecnico'
-    // }],
     lista_escalamiento_grupo: String,
     lista_escalamiento_contacto: String,
     lista_escalamiento_resultado: String
@@ -28,4 +21,4 @@ const Hito1Schema = new Schema({
     timestamps: true
 })
 
-module.exports = model('Hito2', Hito1Schema)
+module.exports = model('Hito2', Hito2Schema)
