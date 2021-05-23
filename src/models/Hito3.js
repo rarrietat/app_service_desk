@@ -6,6 +6,7 @@ const Hito3Schema = new Schema({
     fecha_llegada: Date,
     tecnico_responde: String,
     horario_indicado: String,
+    logro_resultado: String,
     lista_escalamiento_grupo: String,
     lista_escalamiento_contacto: String,
     lista_escalamiento_resultado: String,
@@ -17,6 +18,7 @@ const Hito3Schema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Tecnico'
     }],
+    cumplimiento: String
 }, {
     timestamps: true
 })

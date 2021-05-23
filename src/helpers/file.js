@@ -3,8 +3,14 @@ const multer = require('multer')
 const fs = require('fs')
 const XLSX = require('xlsx')
 const helpers = {}
-
 const Horario = require('../models/Horario')
+const dayjs = require('dayjs')
+require('dayjs/locale/es')
+dayjs.locale('es')
+
+const mesActual = dayjs().format('M')
+const diaActual = dayjs().format('dddd')
+const numberDay = dayjs().format('d')
 
 async function leerExcel(res){
     const ruta = path.join(__dirname, `../public/upload/averias.xls`)
@@ -22,16 +28,95 @@ async function leerExcel(res){
     let uniq = {};
     let filtered = await dataExcel.filter(obj => !uniq[obj['ID de la incidencia']] && (uniq[obj['ID de la incidencia']] = true))
     
-    const horarios = await Horario.find().sort({_id: 'desc'}).populate('usuario').lean()
+    const horarios = await Horario.find({mes: mesActual}).sort({_id: 'asc'}).populate('usuario').lean()
+
+    var arrayUserAsignados = new Array()
+
+    // await horarios.forEach(e => {
+        
+    //     const horaIngreso = dayjs(dayjs().format('YYYY-MM-DD')+ e.semanal[0].ingreso).format()
+    //     const horaIniRegri = dayjs(dayjs().format('YYYY-MM-DD')+ e.semanal[0].refrigerio[0].inicio).format()
+    //     const horaFinRegri = dayjs(dayjs().format('YYYY-MM-DD')+ e.semanal[0].refrigerio[0].fin).format()
+    //     const horaSalida = dayjs(dayjs().format('YYYY-MM-DD')+ e.semanal[0].salida).format()
+    //     const diafinSem = e.finSemana[0].dia
+    //     const horaIngresoFinSem = dayjs(dayjs().format('YYYY-MM-DD')+ e.finSemana[0].ingreso).format()
+    //     const horaIniRegriFinSem = dayjs(dayjs().format('YYYY-MM-DD')+ e.finSemana[0].refrigerio[0].inicio).format()
+    //     const horaFinRegriFinSem = dayjs(dayjs().format('YYYY-MM-DD')+ e.finSemana[0].refrigerio[0].fin).format()
+    //     const horaSalidaFinSem = dayjs(dayjs().format('YYYY-MM-DD')+ e.finSemana[0].salida).format()
+
+    //     if(numberDay === '1' || numberDay === '2' || numberDay === '3' || numberDay === '4' || numberDay === '5'){
+    //         if(horaActual >= horaIngreso &&  horaActual < horaIniRegri || horaActual >= horaFinRegri &&  horaActual < horaSalida){
+    //             arrayUserAsignados.push(e.usuario[0].nombre + ' ' + e.usuario[0].apellido)
+    //         }
+    //     }else if(diaActual === diafinSem){
+            
+    //         if(horaActual >= horaIngresoFinSem &&  horaActual < horaIniRegriFinSem || horaActual >= horaFinRegriFinSem &&  horaActual < horaSalidaFinSem){
+    //             arrayUserAsignados.push(e.usuario[0].nombre + ' ' + e.usuario[0].apellido)
+    //         }
+    
+    //     }
+    
+    // })
 
     let i = 0
+    // const maxCont = arrayUserAsignados.length
+
     const maxCont = horarios.length
 
-    filtered.forEach(element => {
-        element.usuario = `${horarios[i].usuario[0].nombre} ${horarios[i].usuario[0].apellido}`
-        i++
-        if(i == maxCont){i=0}
-    })
+    async function AsignacionUsuarios(date){
+
+        let usuario = ''
+
+        for(let j = 0; j < (maxCont); j++){
+
+            const horaIngreso = await dayjs(dayjs(date).format('YYYY-MM-DD')+ horarios[i].semanal[0].ingreso).format()
+            const horaIniRegri = await dayjs(dayjs(date).format('YYYY-MM-DD')+ horarios[i].semanal[0].refrigerio[0].inicio).format()
+            const horaFinRegri = await dayjs(dayjs(date).format('YYYY-MM-DD')+ horarios[i].semanal[0].refrigerio[0].fin).format()
+            const horaSalida = await dayjs(dayjs(date).format('YYYY-MM-DD')+ horarios[i].semanal[0].salida).subtract(1, 'hour').format()
+            const diafinSem = await horarios[i].finSemana[0].dia
+            const horaIngresoFinSem = await dayjs(dayjs(date).format('YYYY-MM-DD')+ horarios[i].finSemana[0].ingreso).format()
+            const horaIniRegriFinSem = await dayjs(dayjs(date).format('YYYY-MM-DD')+ horarios[i].finSemana[0].refrigerio[0].inicio).format()
+            const horaFinRegriFinSem = await dayjs(dayjs(date).format('YYYY-MM-DD')+ horarios[i].finSemana[0].refrigerio[0].fin).format()
+            const horaSalidaFinSem = await dayjs(dayjs(date).format('YYYY-MM-DD')+ horarios[i].finSemana[0].salida).subtract(1, 'hour').format()
+        
+            if(numberDay === '1' || numberDay === '2' || numberDay === '3' || numberDay === '4' || numberDay === '5'){
+                if(date >= horaIngreso &&  date < horaIniRegri || date >= horaFinRegri &&  date < horaSalida){
+                    usuario = `${horarios[i].usuario[0].nombre} ${horarios[i].usuario[0].apellido}`
+                    i++
+                    if(i == maxCont){i=0}
+                    return usuario
+                }else i++
+            }else if(diaActual === diafinSem){
+                    
+                if(date >= horaIngresoFinSem &&  date < horaIniRegriFinSem || date >= horaFinRegriFinSem &&  date < horaSalidaFinSem){
+                    usuario = `${horarios[i].usuario[0].nombre} ${horarios[i].usuario[0].apellido}`
+                    i++
+                    if(i == maxCont){i=0}
+                    return usuario
+                }else i++
+                
+            }else if(diaActual !== diafinSem){
+                i++
+                if(i == maxCont){i=0}
+                if(j == (maxCont - 1)){j=0}
+            }
+
+            if(i == maxCont){i=0}
+
+        }
+
+    }
+
+    for await (const element of filtered){
+
+        let horaAveriaRegistrada = await element['Fecha de notificación']
+        const partsFecha = await horaAveriaRegistrada.split('/')
+        horaAveriaRegistrada = await dayjs(`${partsFecha[1]}-${partsFecha[0]}-${partsFecha[2]}`).format()
+
+        const usuario = await AsignacionUsuarios(horaAveriaRegistrada)
+        element.usuario = usuario
+
+    }
 
     res.status(200).json(filtered)
 }

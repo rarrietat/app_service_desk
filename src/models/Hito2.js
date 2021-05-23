@@ -16,7 +16,8 @@ const Hito2Schema = new Schema({
     logro_resultado: String,
     lista_escalamiento_grupo: String,
     lista_escalamiento_contacto: String,
-    lista_escalamiento_resultado: String
+    lista_escalamiento_resultado: String,
+    cumplimiento: String
 }, {
     timestamps: true
 })

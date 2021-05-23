@@ -12,7 +12,7 @@ usuarioCtrl.loginUser = (req, res, next) => {
     passport.authenticate('local.login', {
         failureRedirect: 'login',
         //successRedirect: '/',
-        successRedirect: '/asignacion',
+        successRedirect: '/bandeja',
         failureFlash: true
     })(req, res, next)
     

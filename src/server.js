@@ -60,9 +60,11 @@ app.use((req, res, next) => {
 
 // Routes
 app.use(require('./routes/index'))
+app.use(require('./routes/bandeja'))
 app.use(require('./routes/asignacion'))
 app.use(require('./routes/usuario'))
 app.use(require('./routes/horario'))
+app.use(require('./routes/reporte'))
 app.use(require('./routes/equipo'))
 app.use(require('./routes/rol'))
 app.use(require('./routes/equipo_asignado'))

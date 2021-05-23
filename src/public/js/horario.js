@@ -32,7 +32,7 @@ async function load() {
 
     new Choices(selectMes, {shouldSort: false})
 
-    descanso.value = 'Domingo'
+    descanso.value = 'domingo'
 }
 
 async function loadToUpdate() {
@@ -72,10 +72,10 @@ async function loadToUpdate() {
 
 selectFinSemana.addEventListener('change', async () => {
 
-    if(selectFinSemana.value == 'Domingo'){
-        descanso.value = 'Sábado'
+    if(selectFinSemana.value == 'domingo'){
+        descanso.value = 'sábado'
     }else{
-        descanso.value = 'Domingo'
+        descanso.value = 'domingo'
     }
 
 })

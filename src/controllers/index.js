@@ -4,6 +4,10 @@ indexCtrl.renderIndex = (req, res) => {
     res.render('index', { activeHome: true })
 }
 
+indexCtrl.renderBandeja = (req, res) => {
+    res.render('bandeja')
+}
+
 indexCtrl.renderAsignacion = (req, res) => {
     res.render('asignacion')
 }
@@ -14,6 +18,10 @@ indexCtrl.renderUsuario = (req, res) => {
 
 indexCtrl.renderHorario = (req, res) => {
     res.render('horario')
+}
+
+indexCtrl.renderReporte = (req, res) => {
+    res.render('reporte')
 }
 
 indexCtrl.renderEquipo = (req, res) => {
