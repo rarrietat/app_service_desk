@@ -1,4 +1,4 @@
-{{!-- <form action="/cliente/add" method="POST">
+<form action="/cliente/add" method="POST">
     <div class="row">
         <div class="col-12 mb-4">
             <div class="card border-light shadow-sm components-section">
@@ -22,7 +22,7 @@
             </div>
         </div>
     </div>
-</form> --}}
+</form>
 
 <div class="table-responsive">
     <table class="table table-sm table-centered table-nowrap table-striped mb-0 rounded w-50" style="margin: auto;">
@@ -34,19 +34,51 @@
         <tbody>
             <tr>
                 <td class="border-0 font-weight-bold">Cumplimiento</td>
-                <td class="border-0 font-weight-normal text-right">190</td>
-                <td class="border-0 font-weight-normal text-right">80%</td>
+                <td id="cumplimientoSiHito3" class="border-0 font-weight-normal text-right"></td>
+                <td id="porcentajeSiHito3" class="border-0 font-weight-normal text-right"></td>
             </tr>
             <tr>
                 <td class="border-0 font-weight-bold">No Cumplimiento</td>
-                <td class="border-0 font-weight-normal text-right">60</td>
-                <td class="border-0 font-weight-normal text-right">20%</td>
+                <td id="cumplimientoNoHito3" class="border-0 font-weight-normal text-right"></td>
+                <td id="porcentajeNoHito3" class="border-0 font-weight-normal text-right"></td>
             </tr>
             <tr>
                 <td class="border-0 font-weight-bold">Total averias</td>
-                <td class="border-0 font-weight-normal text-right">250</td>
-                <td class="border-0 font-weight-normal text-right">100%</td>
+                <td id="totalHito3" class="border-0 font-weight-normal text-right"></td>
+                <td class="border-0 font-weight-normal text-right">100 %</td>
             </tr>
         </tbody>
     </table>
 </div>
+
+<br>
+<br>
+
+<div class="table-responsive">
+    <table class="table table-sm table-centered table-nowrap table-striped mb-0 rounded w-50" style="margin: auto;">
+        <thead class="thead-dark">
+            <tr>
+                <th colspan="3" class="border-0 text-center">Solución</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="border-0 font-weight-bold">Cumplimiento</td>
+                <td id="cumplimientoSiHito4" class="border-0 font-weight-normal text-right"></td>
+                <td id="porcentajeSiHito4" class="border-0 font-weight-normal text-right"></td>
+            </tr>
+            <tr>
+                <td class="border-0 font-weight-bold">No Cumplimiento</td>
+                <td id="cumplimientoNoHito4" class="border-0 font-weight-normal text-right"></td>
+                <td id="porcentajeNoHito4" class="border-0 font-weight-normal text-right"></td>
+            </tr>
+            <tr>
+                <td class="border-0 font-weight-bold">Total averias</td>
+                <td id="totalHito4" class="border-0 font-weight-normal text-right"></td>
+                <td class="border-0 font-weight-normal text-right">100 %</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="/js/reporte.js"></script>
