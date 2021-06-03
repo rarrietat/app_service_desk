@@ -14,13 +14,13 @@ const {
 
 const {isAuthenticated} = require('../helpers/auth')
 
-router.get('/zonal_asignado/add', renderZonalAsignadoForm)
-router.post('/zonal_asignado/add', createNewZonalAsignado)
-router.get('/zonal_asignado', allZonalAsignados)
-router.get('/zonal_asignado/edit/:id', renderEditForm)
-router.put('/zonal_asignado/edit/:id', updateZonalAsignado)
-router.get('/zonal_asignado/delete/:id', deleteZonalAsignado)
-router.get('/api/zonal_asignados', apiZonalAsignados)
-router.get('/api/zonal_asignados/:id', apiZonalAsignadosByEquipo)
+router.get('/zonal_asignado/add', isAuthenticated, renderZonalAsignadoForm)
+router.post('/zonal_asignado/add', isAuthenticated, createNewZonalAsignado)
+router.get('/zonal_asignado', isAuthenticated, allZonalAsignados)
+router.get('/zonal_asignado/edit/:id', isAuthenticated, renderEditForm)
+router.put('/zonal_asignado/edit/:id', isAuthenticated, updateZonalAsignado)
+router.get('/zonal_asignado/delete/:id', isAuthenticated, deleteZonalAsignado)
+router.get('/api/zonal_asignados', isAuthenticated, apiZonalAsignados)
+router.get('/api/zonal_asignados/:id', isAuthenticated, apiZonalAsignadosByEquipo)
 
 module.exports = router

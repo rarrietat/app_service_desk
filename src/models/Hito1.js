@@ -17,7 +17,7 @@ const Hito1Schema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'UsuarioGrupoGics'
     }],
-    cumplimiento: String
+    cumplimiento: String,
 }, {
     timestamps: true
 })

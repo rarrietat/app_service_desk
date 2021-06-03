@@ -5,7 +5,7 @@ const { allAsignaciones, renderSeguimientoForm } = require('../controllers/bande
 
 const {isAuthenticated} = require('../helpers/auth')
 
-router.get('/bandeja', allAsignaciones)
-router.get('/bandeja/seguimiento/:id', renderSeguimientoForm)
+router.get('/bandeja', isAuthenticated, allAsignaciones)
+router.get('/bandeja/seguimiento/:id', isAuthenticated, renderSeguimientoForm)
 
 module.exports = router

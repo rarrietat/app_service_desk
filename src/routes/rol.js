@@ -13,12 +13,12 @@ const {
 
 const {isAuthenticated} = require('../helpers/auth')
 
-router.get('/rol/add', renderRolForm)
-router.post('/rol/add', createNewRol)
-router.get('/rol', allRoles)
-router.get('/rol/edit/:id', renderEditForm)
-router.put('/rol/edit/:id', updateRol)
-router.get('/rol/delete/:id', deleteRol)
-router.get('/api/roles', apiRoles)
+router.get('/rol/add', isAuthenticated, renderRolForm)
+router.post('/rol/add', isAuthenticated, createNewRol)
+router.get('/rol', isAuthenticated, allRoles)
+router.get('/rol/edit/:id', isAuthenticated, renderEditForm)
+router.put('/rol/edit/:id', isAuthenticated, updateRol)
+router.get('/rol/delete/:id', isAuthenticated, deleteRol)
+router.get('/api/roles', isAuthenticated, apiRoles)
 
 module.exports = router

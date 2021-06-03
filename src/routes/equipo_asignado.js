@@ -13,12 +13,12 @@ const {
 
 const {isAuthenticated} = require('../helpers/auth')
 
-router.get('/equipo_asignado/add', renderEquipoAsignadoForm)
-router.post('/equipo_asignado/add', createNewEquipoAsignado)
-router.get('/equipo_asignado',     allEquiposAsignados)
-router.get('/equipo_asignado/edit/:id', renderEditForm)
-router.put('/equipo_asignado/edit/:id', updateEquipoAsignado)
-router.get('/equipo_asignado/delete/:id', deleteEquipoAsignado)
-router.get('/api/equipos_asignados', apiEquiposAsignados)
+router.get('/equipo_asignado/add', isAuthenticated, renderEquipoAsignadoForm)
+router.post('/equipo_asignado/add', isAuthenticated, createNewEquipoAsignado)
+router.get('/equipo_asignado', isAuthenticated, allEquiposAsignados)
+router.get('/equipo_asignado/edit/:id', isAuthenticated, renderEditForm)
+router.put('/equipo_asignado/edit/:id', isAuthenticated, updateEquipoAsignado)
+router.get('/equipo_asignado/delete/:id', isAuthenticated, deleteEquipoAsignado)
+router.get('/api/equipos_asignados', isAuthenticated, apiEquiposAsignados)
 
 module.exports = router

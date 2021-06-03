@@ -13,12 +13,12 @@ const {
 
 const {isAuthenticated} = require('../helpers/auth')
 
-router.get('/asesor/add', renderAsesorForm)
-router.post('/asesor/add', createNewAsesor)
-router.get('/asesor', allAsesores)
-router.get('/asesor/edit/:id', renderEditForm)
-router.put('/asesor/edit/:id', updateAsesor)
-router.get('/asesor/delete/:id', deleteAsesor)
+router.get('/asesor/add', isAuthenticated, renderAsesorForm)
+router.post('/asesor/add', isAuthenticated, createNewAsesor)
+router.get('/asesor', isAuthenticated, allAsesores)
+router.get('/asesor/edit/:id', isAuthenticated, renderEditForm)
+router.put('/asesor/edit/:id', isAuthenticated, updateAsesor)
+router.get('/asesor/delete/:id', isAuthenticated, deleteAsesor)
 
 router.get('/api/asesores', apiAsesores)
 

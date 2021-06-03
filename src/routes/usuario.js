@@ -18,14 +18,14 @@ const {isAuthenticated} = require('../helpers/auth')
 
 router.get('/login', renderLoginForm)
 router.post('/login', loginUser)
-router.get('/logout', logoutUser)
+router.get('/logout', isAuthenticated, logoutUser)
 
-router.get('/usuario/add', renderUsuarioForm)
-router.post('/usuario/add', createNewUsuario)
-router.get('/usuario', allUsuarios)
-router.get('/usuario/edit/:id', renderEditForm)
-router.put('/usuario/edit/:id', updateUsuario)
-router.get('/usuario/delete/:id', deleteUsuario)
+router.get('/usuario/add', isAuthenticated, renderUsuarioForm)
+router.post('/usuario/add', isAuthenticated, createNewUsuario)
+router.get('/usuario', isAuthenticated, allUsuarios)
+router.get('/usuario/edit/:id', isAuthenticated, renderEditForm)
+router.put('/usuario/edit/:id', isAuthenticated, updateUsuario)
+router.get('/usuario/delete/:id', isAuthenticated, deleteUsuario)
 
 router.get('/api/usuarios', apiUsuarios)
 

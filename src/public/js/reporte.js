@@ -16,6 +16,9 @@ const porcentajeNoHito4 = document.querySelector('#porcentajeNoHito4')
 const totalHito4 = document.querySelector('#totalHito4')
 const totalPorcentajeHito4 = document.querySelector('#totalPorcentajeHito4')
 
+const ctx1 = document.querySelector('#chartHito3').getContext('2d')
+const ctx2 = document.querySelector('#chartHito4').getContext('2d')
+
 async function listYear(){
 
     await fetch('/api/anio_reporte')
@@ -132,106 +135,87 @@ async function totalCasesChart(ctx1, ctx2, year, month){
     await fetch(`/api/reporte/${year}/${month}`)
         .then(async res => await res.json())
         .then(async data => {
-            data.hito3.forEach(e => {
-                if(e._id == 'si'){
-                    dataHito3.push(e.cumplimientoSi)
-                }else{
-                    dataHito3.push(e.cumplimientoNo)
+            
+            await data.hito3.forEach(e => {
+                if(data.hito3[0].cumplimientoSi === undefined && data.hito3[0].cumplimientoNo != undefined) dataHito3.push(0)
+                if(e._id == 'si') dataHito3.push(e.cumplimientoSi)
+                if(e._id == 'no') dataHito3.push(e.cumplimientoNo)
+            })
+
+            chartsHito3 = await new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['Cumplimiento', 'No Cumplimiento'],
+                    datasets: [{
+                        label: 'Averias',
+                        data: dataHito3,
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(255, 99, 132, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                          display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
                 }
             })
 
-            data.hito4.forEach(e => {
-                if(e._id == 'si'){
-                    dataHito4.push(e.cumplimientoSi)
-                }else{
-                    dataHito4.push(e.cumplimientoNo)
+            await data.hito4.forEach(e => {
+                if(data.hito4[0].cumplimientoSi === undefined && data.hito4[0].cumplimientoNo != undefined) dataHito4.push(0)
+                if(e._id == 'si') dataHito4.push(e.cumplimientoSi)
+                if(e._id == 'no') dataHito4.push(e.cumplimientoNo)
+            })
+
+            chartsHito4 = await new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Cumplimiento', 'No Cumplimiento'],
+                    datasets: [{
+                        label: 'Averias',
+                        data: dataHito4,
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(255, 99, 132, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                          display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
                 }
             })
         })
 
-    if (chartsHito3) {
-        chartsHito3.destroy()
-    }
-    if (chartsHito4) {
-        chartsHito4.destroy()
-    }
-
-    chartsHito3 = new Chart(ctx1, {
-        type: 'bar',
-        data: {
-            labels: ['Cumplimiento', 'No Cumplimiento'],
-            datasets: [{
-                label: 'Averias',
-                data: dataHito3,
-                backgroundColor: [
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(255, 99, 132, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(255, 99, 132, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            plugins: {
-                legend: {
-                  display: false
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    })
-
-    chartsHito4 = new Chart(ctx2, {
-        type: 'bar',
-        data: {
-            labels: ['Cumplimiento', 'No Cumplimiento'],
-            datasets: [{
-                label: 'Averias',
-                data: dataHito4,
-                backgroundColor: [
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(255, 99, 132, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(255, 99, 132, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            plugins: {
-                legend: {
-                  display: false
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    })
-
 }
 
 async function renderCharts(year, month){
-    const ctx1 = document.querySelector('#chartHito3').getContext('2d')
-    const ctx2 = document.querySelector('#chartHito4').getContext('2d')
-    if(ctx1.chartHito3){
-        chartHito3.destroy();
-    }
-
-    if(ctx2.chartHito4){
-        chartHito4.destroy();
-    }
 
     await totalCasesChart(ctx1, ctx2, year, month)
 }
